@@ -48,7 +48,7 @@ export class ChatConversationComponent implements OnInit {
   isToolCallsCollapsed = signal(true)
   messageInput = signal('')
   chatBotName = signal('Ava')
-  chatBotAvatar = signal('assets/public/images/CIBCAdvisorBot.png')
+  chatBotAvatar = signal('assets/public/images/ScotiaAdvisorBot.png')
 
   private conversationId = ''
 

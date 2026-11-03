@@ -127,23 +127,23 @@ $lime-green-theme: mat.define-theme($lime-green-config);
   background-color: var(--mat-sys-surface);
 }
 
-$cibc-red-burgundy-config: (
+$scotia-red-config: (
   color: (
     theme-type: light,
     primary: mat.$red-palette,
     tertiary: mat.$red-palette,
   )
 );
-$cibc-red-burgundy-theme: mat.define-theme($cibc-red-burgundy-config);
+$scotia-red-theme: mat.define-theme($scotia-red-config);
 
-.cibc-red-burgundy-theme {
-  @include mat.theme($cibc-red-burgundy-config);
+.scotia-red-theme {
+  @include mat.theme($scotia-red-config);
 
   --mat-sys-surface: #fff;
   --mat-sys-background: #fff;
   --mat-sys-on-surface: #333;
   --mat-sys-on-background: #333;
-  --mat-sys-tertiary: #802741;
+  --mat-sys-tertiary: #3b0a0a;
   --mat-sys-on-tertiary: #fff;
 
   color: var(--mat-sys-on-surface);

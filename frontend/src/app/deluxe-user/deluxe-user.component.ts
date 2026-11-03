@@ -33,7 +33,7 @@ export class DeluxeUserComponent implements OnInit {
   public membershipCost = 0
   public error?: string = undefined
   public applicationName = 'OWASP Juice Shop'
-  public logoSrc = 'assets/public/images/CIBCPortfolio_Logo.png'
+  public logoSrc = 'assets/public/images/Scotiabank_Logo.svg'
 
   public SHOWCASES = [
     {

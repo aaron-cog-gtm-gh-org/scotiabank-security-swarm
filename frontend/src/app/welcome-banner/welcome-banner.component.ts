@@ -26,7 +26,7 @@ export class WelcomeBannerComponent implements OnInit {
   private readonly cookieService = inject(CookieService)
 
   public title = 'Welcome to your Portfolio Overview'
-  public message = "<p>Track your combined balance, asset mix and holdings across your <strong>RRSP</strong>, <strong>TFSA</strong> and <strong>Cash</strong> accounts, then build a <strong>Trade Ticket</strong> to place your next order.</p><p><em>Demo interface with mock data. Not affiliated with Canadian Imperial Bank of Commerce. Balances, quotes and holdings shown in this application are fictional and must not be used for investment decisions.</em></p>"
+  public message = "<p>Track your combined balance, asset mix and holdings across your <strong>RRSP</strong>, <strong>TFSA</strong> and <strong>Cash</strong> accounts, then build a <strong>Trade Ticket</strong> to place your next order.</p><p><em>Demo interface with mock data. Not affiliated with The Bank of Nova Scotia. Balances, quotes and holdings shown in this application are fictional and must not be used for investment decisions.</em></p>"
   public showHackingInstructor = true
   public showDismissBtn = true
 

@@ -60,12 +60,12 @@ export const themes = {
     primLight: '#ddee48',
     primDark: '#97a621'
   },
-  'cibc-red-burgundy': {
-    bgColor: '#F2F3F2',
+  'scotia-red': {
+    bgColor: '#f5f6fa',
     textColor: '#333333',
-    navColor: '#E0E9F6',
+    navColor: '#ec111a',
     primLight: '#FFFFFF',
-    primDark: '#802741'
+    primDark: '#3b0a0a'
   },
   'neon-fire': {
     bgColor: '#000000',

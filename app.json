@@ -1,5 +1,5 @@
 {
-  "name": "CIBC Portfolio Tracker",
+  "name": "Scotiabank Portfolio Tracker",
   "description": "Self-directed investing portfolio dashboard for security training",
   "keywords": [
     "web security",
@@ -16,9 +16,9 @@
     "capture the flag",
     "awareness"
   ],
-  "website": "https://github.com/aaron-cog-gtm-gh-org/investment-portfolio",
-  "repository": "https://github.com/aaron-cog-gtm-gh-org/investment-portfolio",
-  "logo": "https://raw.githubusercontent.com/aaron-cog-gtm-gh-org/investment-portfolio/master/frontend/src/assets/public/images/CIBCPortfolio_Logo.png",
+  "website": "https://github.com/aaron-cog-gtm-gh-org/scotiabank-security-swarm",
+  "repository": "https://github.com/aaron-cog-gtm-gh-org/scotiabank-security-swarm",
+  "logo": "https://raw.githubusercontent.com/aaron-cog-gtm-gh-org/scotiabank-security-swarm/main/frontend/src/assets/public/images/Scotiabank_Logo.svg",
   "engines": {
     "node": "24.x"
   }

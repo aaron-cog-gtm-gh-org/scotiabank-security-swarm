@@ -7,7 +7,7 @@ variable "aws_region" {
 variable "project_name" {
   description = "Name of the project"
   type        = string
-  default     = "cibc-portfolio-tracker"
+  default     = "scotia-portfolio-tracker"
 }
 
 variable "environment" {
@@ -55,7 +55,7 @@ variable "node_env" {
 variable "ecr_repository_url" {
   description = "ECR repository URL for the Docker image"
   type        = string
-  default     = "123456789012.dkr.ecr.eu-west-1.amazonaws.com/cibc-portfolio-tracker"
+  default     = "123456789012.dkr.ecr.eu-west-1.amazonaws.com/scotia-portfolio-tracker"
 }
 
 variable "container_tag" {

@@ -7,18 +7,20 @@
 
   <mat-toolbar-row class="utility-row">
     <nav class="utility-links hide-lt-sm" aria-label="Corporate links">
+      <a class="active" routerLink="/search">Personal</a>
+      <a routerLink="/about">Business</a>
+      <a routerLink="/about">Commercial</a>
+      <a routerLink="/search">Global Markets</a>
+      <a routerLink="/search">Global Wealth</a>
       <a routerLink="/about">About Us</a>
-      <a routerLink="/contact">Contact Us</a>
-      <a routerLink="/order-history">Order Status</a>
-      <a routerLink="/chatbot">Advisor Chat</a>
+      <a routerLink="/search">Investors</a>
     </nav>
+    <a class="more-sites hide-lt-md" routerLink="/about">More Sites</a>
     <button id="navbarLanguageButton" [matMenuTriggerFor]="menu" mat-button class="buttons utility-language"
       aria-label="Language selection menu"
       matTooltip="{{ 'LANGUAGE_SEL_HINT' | translate }}" matTooltipPosition="below">
-      <mat-icon>
-        language
-      </mat-icon>
-      <span> {{shortKeyLang}} </span>
+      <span>{{ shortKeyLang === 'EN' ? 'English' : shortKeyLang }}</span>
+      <mat-icon iconPositionEnd>keyboard_arrow_down</mat-icon>
     </button>
   </mat-toolbar-row>
 
@@ -32,31 +34,44 @@
     <button mat-button routerLink="/search" class="buttons nav-home-button" aria-label="Back to homepage">
       <div id="homeButton">
         <img [src]="logoSrc" class="logo" alt={{applicationName}}>
-        <span class="hide-lt-sm app-name"> {{applicationName}} </span>
+        <span class="app-name">{{ applicationName }}</span>
       </div>
     </button>
 
     <div class="search-area">
       <div id="product-search-fixture"></div>
-      <app-mat-search-bar #searchControl id="searchQuery" (onEnter)="search(searchControl.value)"
+      <app-mat-search-bar #searchControl id="searchQuery" [alwaysOpen]="true" placeholder="Begin Your Search" (onEnter)="search(searchControl.value)"
       aria-label="Click to search"></app-mat-search-bar>
     </div>
 
     <div class="navbar-actions">
-      <a mat-icon-button routerLink="/contact" class="nav-icon-button hide-lt-md" aria-label="Contact us"
-        matTooltip="Contact us" matTooltipPosition="below">
+      <a routerLink="/contact" class="nav-icon-button hide-lt-md" aria-label="Location">
         <mat-icon>place</mat-icon>
+        <span>Location</span>
       </a>
-      <a mat-icon-button routerLink="/chatbot" class="nav-icon-button hide-lt-md" aria-label="Get help"
-        matTooltip="Get help" matTooltipPosition="below">
-        <mat-icon>help_outline</mat-icon>
+      <a routerLink="/contact" class="nav-icon-button hide-lt-md" aria-label="Contact us">
+        <mat-icon>phone</mat-icon>
+        <span>Contact Us</span>
+      </a>
+      <a routerLink="/deluxe-membership" class="nav-icon-button hide-lt-md" aria-label="Offers">
+        <mat-icon>workspace_premium</mat-icon>
+        <span>Offers</span>
       </a>
 
-      <button [matMenuTriggerFor]="userMenu" mat-flat-button class="buttons hide-lt-md nav-account-button"
+      @if (!isLoggedIn()) {
+        <div class="sign-in-area">
+          <a mat-flat-button routerLink="/login" class="nav-account-button" id="navbarAccount">
+            <mat-icon>lock_outline</mat-icon>Sign In
+          </a>
+          <span class="enrol-prompt">New to Scotia OnLine? <a routerLink="/register">Activate Now</a></span>
+        </div>
+      } @else {
+      <button [matMenuTriggerFor]="userMenu" mat-flat-button class="buttons nav-account-button"
         aria-label="Show/hide account menu" id="navbarAccount">
         <span> {{ isLoggedIn() ? ("ACCOUNT" | translate) : "Sign on" }} </span>
         <mat-icon iconPositionEnd>expand_more</mat-icon>
       </button>
+      }
 
     <mat-menu #userMenu="matMenu">
       @if (isLoggedIn()) {
@@ -124,13 +139,7 @@
       }
     </mat-menu>
 
-    @if (!isLoggedIn()) {
-      <div class="enrol-prompt hide-lt-md">
-        <span>Not enrolled yet?</span>
-        <a routerLink="/register">Register now</a>
-      </div>
-    }
-
+    @if (isLoggedIn()) {
     <button mat-button routerLink="/basket" class="buttons nav-button nav-basket-button"
       aria-label="Show the shopping cart">
       <mat-icon>
@@ -139,6 +148,7 @@
       <span class="hide-lt-md basket-label"> {{"TITLE_BASKET" | translate}}</span>
       <span class="fa-layers-counter fa-layers-top-right fa-3x warn-notification">{{itemTotal}}</span>
     </button>
+    }
 
     <mat-menu #menu="matMenu" [overlapTrigger]="true">
       <div class="language-search-container" (click)="$event.stopPropagation()">
@@ -265,12 +275,16 @@
 
   <mat-toolbar-row class="subnav-row hide-lt-sm">
     <nav class="subnav" aria-label="Portfolio sections">
-      <a mat-button class="subnav-link" routerLink="/search">Home</a>
-      <a mat-button class="subnav-link" routerLink="/order-history">Monitor</a>
-      <a mat-button class="subnav-link" routerLink="/basket">Trade &amp; Transfer</a>
-      <a mat-button class="subnav-link" routerLink="/search">Research</a>
-      <a mat-button class="subnav-link" routerLink="/about">Explore</a>
-      <a mat-button class="subnav-link" routerLink="/contact">Help</a>
+      <a mat-button class="subnav-link" routerLink="/accounts">Bank Accounts</a>
+      <a mat-button class="subnav-link" routerLink="/saved-payment-methods">Credit Cards</a>
+      <a mat-button class="subnav-link" routerLink="/search">Investments</a>
+      <a mat-button class="subnav-link" routerLink="/wallet">Loans &amp; Lines of Credit</a>
+      <a mat-button class="subnav-link" routerLink="/contact">Mortgages</a>
+      <a mat-button class="subnav-link" routerLink="/contact">Insurance</a>
+      <a mat-button class="subnav-link" routerLink="/chatbot">Advice+</a>
+      <a mat-button class="subnav-link" routerLink="/scene-plus">Scene+</a>
+      <a mat-button class="subnav-link" routerLink="/about">Programs</a>
+      <a mat-button class="subnav-link" routerLink="/search">Rates &amp; Fees</a>
     </nav>
   </mat-toolbar-row>
 </mat-toolbar>

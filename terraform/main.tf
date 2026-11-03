@@ -17,7 +17,7 @@ resource "null_resource" "docker_build" {
   }
 }
 
-resource "aws_ecs_cluster" "cibc_portfolio_tracker" {
+resource "aws_ecs_cluster" "scotia_portfolio_tracker" {
   name = "${var.project_name}-cluster"
 
   setting {
@@ -32,7 +32,7 @@ resource "aws_ecs_cluster" "cibc_portfolio_tracker" {
   }
 }
 
-resource "aws_ecs_task_definition" "cibc_portfolio_tracker" {
+resource "aws_ecs_task_definition" "scotia_portfolio_tracker" {
   family                   = "${var.project_name}-task"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
@@ -61,14 +61,14 @@ resource "aws_ecs_task_definition" "cibc_portfolio_tracker" {
       mountPoints = [
         {
           sourceVolume  = "sqlite-data"
-          containerPath = "/cibc-portfolio-tracker/data/sqlite"
+          containerPath = "/scotia-portfolio-tracker/data/sqlite"
           readOnly      = false
         }
       ]
       logConfiguration = {
         logDriver = "awslogs"
         options = {
-          "awslogs-group"         = aws_cloudwatch_log_group.cibc_portfolio_tracker.name
+          "awslogs-group"         = aws_cloudwatch_log_group.scotia_portfolio_tracker.name
           "awslogs-region"        = var.aws_region
           "awslogs-stream-prefix" = "ecs"
         }
@@ -80,11 +80,11 @@ resource "aws_ecs_task_definition" "cibc_portfolio_tracker" {
     name = "sqlite-data"
 
     efs_volume_configuration {
-      file_system_id     = aws_efs_file_system.cibc_portfolio_tracker_data.id
+      file_system_id     = aws_efs_file_system.scotia_portfolio_tracker_data.id
       transit_encryption = "ENABLED"
 
       authorization_config {
-        access_point_id = aws_efs_access_point.cibc_portfolio_tracker_data.id
+        access_point_id = aws_efs_access_point.scotia_portfolio_tracker_data.id
         iam             = "DISABLED"
       }
     }
@@ -96,10 +96,10 @@ resource "aws_ecs_task_definition" "cibc_portfolio_tracker" {
   }
 }
 
-resource "aws_ecs_service" "cibc_portfolio_tracker" {
+resource "aws_ecs_service" "scotia_portfolio_tracker" {
   name            = "${var.project_name}-service"
-  cluster         = aws_ecs_cluster.cibc_portfolio_tracker.id
-  task_definition = aws_ecs_task_definition.cibc_portfolio_tracker.arn
+  cluster         = aws_ecs_cluster.scotia_portfolio_tracker.id
+  task_definition = aws_ecs_task_definition.scotia_portfolio_tracker.arn
   desired_count   = var.desired_count
   launch_type     = "FARGATE"
 
@@ -110,7 +110,7 @@ resource "aws_ecs_service" "cibc_portfolio_tracker" {
   }
 
   load_balancer {
-    target_group_arn = aws_lb_target_group.cibc_portfolio_tracker.arn
+    target_group_arn = aws_lb_target_group.scotia_portfolio_tracker.arn
     container_name   = var.project_name
     container_port   = 3000
   }
@@ -123,7 +123,7 @@ resource "aws_ecs_service" "cibc_portfolio_tracker" {
   }
 }
 
-resource "aws_cloudwatch_log_group" "cibc_portfolio_tracker" {
+resource "aws_cloudwatch_log_group" "scotia_portfolio_tracker" {
   name              = "/ecs/${var.project_name}"
   retention_in_days = 30
 

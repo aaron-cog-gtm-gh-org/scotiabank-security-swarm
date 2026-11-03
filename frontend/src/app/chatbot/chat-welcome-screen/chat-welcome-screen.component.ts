@@ -37,7 +37,7 @@ export class ChatWelcomeScreenComponent implements OnInit {
 
   conversations = signal<StoredConversation[]>(this.conversationStorage.getAll())
   chatBotName = signal('Ava')
-  chatBotAvatar = signal('assets/public/images/CIBCAdvisorBot.png')
+  chatBotAvatar = signal('assets/public/images/ScotiaAdvisorBot.png')
   sampleQuestions = signal<string[]>([])
 
   ngOnInit () {

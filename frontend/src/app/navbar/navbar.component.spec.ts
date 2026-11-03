@@ -215,7 +215,7 @@ describe('NavbarComponent', () => {
     it('should use default application name if not customized', () => {
         configurationService.getApplicationConfiguration.mockReturnValue(of({}))
         component.ngOnInit()
-        expect(component.applicationName).toBe('OWASP Juice Shop')
+        expect(component.applicationName).toBe('Scotiabank Portfolio Tracker')
     })
 
     it('should use custom application name URL if configured', () => {
@@ -357,10 +357,26 @@ describe('NavbarComponent', () => {
         })
 
         it('should render the basket button with the current itemTotal', () => {
+            vi.spyOn(component, 'isLoggedIn').mockReturnValue('token')
             component.itemTotal = 7
             fixture.detectChanges()
             const counter = (fixture.nativeElement as HTMLElement).querySelector('.warn-notification')
             expect(counter?.textContent).toContain('7')
+        })
+
+        it('should show sign in and activation instead of a trade ticket when signed out', () => {
+            vi.spyOn(component, 'isLoggedIn').mockReturnValue('')
+            fixture.detectChanges()
+            const element: HTMLElement = fixture.nativeElement
+            expect(element.querySelector('#navbarAccount')?.getAttribute('href')).toBe('/login')
+            expect(element.querySelector('.enrol-prompt a')?.getAttribute('href')).toBe('/register')
+            expect(element.querySelector('.nav-basket-button')).toBeNull()
+        })
+
+        it('should link to the planned accounts and Scene+ pages', () => {
+            const element: HTMLElement = fixture.nativeElement
+            expect(element.querySelector('.subnav a[href="/accounts"]')).toBeTruthy()
+            expect(element.querySelector('.subnav a[href="/scene-plus"]')).toBeTruthy()
         })
 
         it('should render the application name in the home button', () => {

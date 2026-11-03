@@ -468,41 +468,82 @@ $bg-hacking-instructor: rgba(0, 0, 0, 0.3);
   @include theme-overrides(#1976d2, #fafafa, #29b6f6, #000);
 }
 
-.cibc-red-burgundy-theme {
-  @include custom-components-theme($cibc-red-burgundy-theme);
-  @include css-vars($cibc-red-burgundy-theme);
-  @include theme-overrides(#b43242, #fff, #fff, #333);
+.scotia-red-theme {
+  --mat-sys-body-large-font: 'Figtree', Arial, sans-serif;
+  --mat-sys-body-medium-font: 'Figtree', Arial, sans-serif;
+  --mat-sys-body-small-font: 'Figtree', Arial, sans-serif;
+  --mat-sys-headline-large-font: 'Figtree', Arial, sans-serif;
+  --mat-sys-headline-medium-font: 'Figtree', Arial, sans-serif;
+  --mat-sys-headline-small-font: 'Figtree', Arial, sans-serif;
+  --mat-sys-title-large-font: 'Figtree', Arial, sans-serif;
+  --mat-sys-title-medium-font: 'Figtree', Arial, sans-serif;
+  --mat-sys-title-small-font: 'Figtree', Arial, sans-serif;
+  --mat-sys-label-large-font: 'Figtree', Arial, sans-serif;
+  --mat-sys-label-medium-font: 'Figtree', Arial, sans-serif;
+  --mat-sys-label-small-font: 'Figtree', Arial, sans-serif;
+
+  font-family: 'Figtree', Arial, sans-serif;
+
+  input,
+  button,
+  a,
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  span {
+    font-family: inherit;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-weight: 750;
+    letter-spacing: -0.7px;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible {
+    outline: 2px solid #ec111a;
+    outline-offset: 4px;
+  }
+
+  @include custom-components-theme($scotia-red-theme);
+  @include css-vars($scotia-red-theme);
+  @include theme-overrides(#ec111a, #fff, #fff, #333);
 
   // Brand palette consumed by the portfolio dashboard components
-  --cibc-red: #b43242;
-  --cibc-red-dark: #8f2233;
-  --cibc-red-mid: #c95563;
-  --cibc-burgundy: #802741;
-  --cibc-sky: #e0e9f6;
-  --cibc-mist: #f2f3f2;
-  --cibc-rule: #dcdcdc;
-  --cibc-ink: #333;
-  --cibc-gain: #0f7b4f;
-  --cibc-loss: #b43242;
+  --scotia-red: #ec111a;
+  --scotia-red-dark: #c8102e;
+  --scotia-red-mid: #c8102e;
+  --scotia-burgundy: #3b0a0a;
+  --scotia-sky: #f5f6fa;
+  --scotia-mist: #f5f6fa;
+  --scotia-rule: #e2e2e2;
+  --scotia-ink: #333;
+  --scotia-gain: #138636;
+  --scotia-loss: #ec111a;
 
-  --mat-sys-primary: #b43242;
+  --mat-sys-primary: #ec111a;
   --mat-sys-on-primary: #fff;
-  --mat-sys-tertiary: #802741;
+  --mat-sys-tertiary: #3b0a0a;
   --mat-sys-on-tertiary: #fff;
 
-  --theme-accent: #802741;
-  --theme-accent-lighter: #93304c;
-  --theme-accent-light: #a03553;
-  --theme-accent-darker: #6d2137;
-  --theme-accent-dark: #601d31;
-  --theme-accent-fade-10: rgb(128 39 65 / 10%);
-  --theme-accent-fade-20: rgb(128 39 65 / 20%);
-  --theme-accent-fade-30: rgb(128 39 65 / 30%);
-  --theme-accent-fade-40: rgb(128 39 65 / 40%);
-  --theme-accent-fade-50: rgb(128 39 65 / 50%);
+  --theme-accent: #3b0a0a;
+  --theme-accent-lighter: #c8102e;
+  --theme-accent-light: #c8102e;
+  --theme-accent-darker: #3b0a0a;
+  --theme-accent-dark: #3b0a0a;
+  --theme-accent-fade-10: rgb(59 10 10 / 10%);
+  --theme-accent-fade-20: rgb(59 10 10 / 20%);
+  --theme-accent-fade-30: rgb(59 10 10 / 30%);
+  --theme-accent-fade-40: rgb(59 10 10 / 40%);
+  --theme-accent-fade-50: rgb(59 10 10 / 50%);
 
   .cc-window.cc-floating {
-    border-top: 4px solid #b43242;
+    border-top: 4px solid #ec111a;
     border-radius: 4px;
     background-color: #fff !important;
     box-shadow: 0 4px 16px rgb(0 0 0 / 15%);
@@ -510,12 +551,12 @@ $bg-hacking-instructor: rgba(0, 0, 0, 0.3);
   }
 
   .cc-window .cc-link {
-    color: #b43242 !important;
+    color: #ec111a !important;
   }
 
   .cc-window .cc-btn {
     border-radius: 4px;
-    background-color: #b43242 !important;
+    background-color: #ec111a !important;
     color: #fff !important;
   }
 
@@ -523,22 +564,34 @@ $bg-hacking-instructor: rgba(0, 0, 0, 0.3);
   .mat-mdc-unelevated-button.mat-primary,
   .mat-mdc-raised-button.mat-tertiary,
   .mat-mdc-unelevated-button.mat-tertiary {
-    --mdc-filled-button-container-color: #b43242;
-    --mat-button-filled-container-color: #b43242;
-    --mat-button-protected-container-color: #b43242;
+    --mdc-filled-button-container-color: #ec111a;
+    --mat-button-filled-container-color: #ec111a;
+    --mat-button-protected-container-color: #ec111a;
     background-color: var(--mdc-filled-button-container-color);
-    border-radius: 4px;
+    border-radius: 999px;
     color: #fff;
   }
 
   .mat-mdc-raised-button,
   .mat-mdc-unelevated-button,
   .mat-mdc-outlined-button {
-    border-radius: 4px;
+    border-radius: 999px;
+    font-weight: 700;
+  }
+
+  .mat-mdc-outlined-button {
+    background: #fff;
+    border: 1px solid #333;
+    color: #333;
+  }
+
+  .mat-mdc-raised-button:hover,
+  .mat-mdc-unelevated-button:hover {
+    background: #c8102e;
   }
 
   app-product .mat-card {
-    border: 1px solid var(--cibc-rule);
+    border: 1px solid var(--scotia-rule);
     border-radius: 4px;
     overflow: hidden;
   }
@@ -546,7 +599,7 @@ $bg-hacking-instructor: rgba(0, 0, 0, 0.3);
   app-product .image-container {
     aspect-ratio: 16 / 10;
     border: 0;
-    background-color: var(--cibc-sky);
+    background-color: var(--scotia-sky);
   }
 
   app-product .img-thumbnail {
@@ -568,8 +621,8 @@ $bg-hacking-instructor: rgba(0, 0, 0, 0.3);
   }
 
   app-product .btn-basket {
-    background-color: #b43242;
-    border-radius: 4px;
+    background-color: #ec111a;
+    border-radius: 999px;
     color: #fff;
   }
 

@@ -83,7 +83,7 @@ export const ApplicationSchema = z.object({
   name: z.string(),
   logo: z.string(),
   favicon: z.string(),
-  theme: z.enum(['deeppurple-amber', 'indigo-pink', 'pink-bluegrey', 'purple-green', 'blue-lightblue', 'bluegrey-lightgreen', 'deeporange-indigo', 'lime-green', 'neon-fire', 'cibc-red-burgundy']),
+  theme: z.enum(['deeppurple-amber', 'indigo-pink', 'pink-bluegrey', 'purple-green', 'blue-lightblue', 'bluegrey-lightgreen', 'deeporange-indigo', 'lime-green', 'neon-fire', 'scotia-red']),
   showVersionNumber: z.boolean(),
   showGitHubLinks: z.boolean(),
   localBackupEnabled: z.boolean(),

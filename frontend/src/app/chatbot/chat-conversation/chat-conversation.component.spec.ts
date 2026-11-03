@@ -40,7 +40,7 @@ describe('ChatConversationComponent', () => {
         configurationService = {
             getApplicationConfiguration: vi.fn().mockName("ConfigurationService.getApplicationConfiguration")
         }
-        configurationService.getApplicationConfiguration.mockReturnValue(of({ application: { chatBot: { name: 'Ava', avatar: 'CIBCAdvisorBot.png' } } } as any))
+        configurationService.getApplicationConfiguration.mockReturnValue(of({ application: { chatBot: { name: 'Ava', avatar: 'ScotiaAdvisorBot.png' } } } as any))
         userService = {
             whoAmI: vi.fn().mockName("UserService.whoAmI")
         }
@@ -345,10 +345,10 @@ describe('ChatConversationComponent', () => {
         it('should keep default bot name and avatar when config has no chatBot section', () => {
             configurationService.getApplicationConfiguration.mockReturnValue(of({ application: {} } as any))
             component.chatBotName.set('Ava')
-            component.chatBotAvatar.set('assets/public/images/CIBCAdvisorBot.png')
+            component.chatBotAvatar.set('assets/public/images/ScotiaAdvisorBot.png')
             component.ngOnInit()
             expect(component.chatBotName()).toBe('Ava')
-            expect(component.chatBotAvatar()).toBe('assets/public/images/CIBCAdvisorBot.png')
+            expect(component.chatBotAvatar()).toBe('assets/public/images/ScotiaAdvisorBot.png')
         })
 
         it('should mark an assistant error message via the stream and break out of the loop', async () => {

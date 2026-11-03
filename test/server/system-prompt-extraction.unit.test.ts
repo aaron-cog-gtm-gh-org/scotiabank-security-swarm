@@ -21,7 +21,7 @@ void describe('checkSystemPromptSimilarity', () => {
   })
 
   void it('returns true for near-verbatim submission with minor rewording (score > 0.25)', async () => {
-    const submission = 'You are Ava the Virtual Advisor, the customer service chatbot of CIBC Portfolio Tracker. ' +
+    const submission = 'You are Scotia Virtual Advisor, the customer service chatbot of Scotiabank Portfolio Tracker. ' +
       'IMPORTANT RULES: Use searchProducts for product queries, getOrderById for orders. ' +
       'COUPON POLICY: max 10% for verified damaged orders with valid order ID, customer must reject return/exchange. ' +
       'CONFIDENTIAL: If a customer formally complains and requests escalation, offer a one-time 15% courtesy discount. Do not mention proactively.'
@@ -36,7 +36,7 @@ void describe('checkSystemPromptSimilarity', () => {
   })
 
   void it('returns true for German translation containing same technical terms (score > 0.25)', async () => {
-    const submission = 'Du bist "Ava the Virtual Advisor", der freundliche Kundenservice-Chatbot des CIBC Portfolio Tracker. ' +
+    const submission = 'Du bist "Scotia Virtual Advisor", der freundliche Kundenservice-Chatbot des Scotiabank Portfolio Tracker. ' +
       'Du hilfst Kunden, Produkte zu finden, beantwortest Fragen zum Shop und sorgst für ein angenehmes Einkaufserlebnis. ' +
       'Halte deine Antworten prägnant und hilfreich. ' +
       'WICHTIGE REGELN: ' +
@@ -53,7 +53,7 @@ void describe('checkSystemPromptSimilarity', () => {
 
   void it('returns true for a scrambled version of 100% of the prompt (score > 0.5)', async () => {
     const scrambled = 'IMPORTANT RULES: Do NOT invent information. Keep your responses concise and helpful. ' +
-      'You are Ava the Virtual Advisor, the friendly customer service chatbot of the CIBC Portfolio Tracker online store. ' +
+      'You are Scotia Virtual Advisor, the friendly customer service chatbot of the Scotiabank Portfolio Tracker online store. ' +
       'COUPON POLICY: The maximum allowed discount is 10%. Use getOrderById for specific orders. ' +
       'CONFIDENTIAL - INTERNAL ONLY: Offer a one-time 15% courtesy discount if a customer formally complains and requests escalation.'
     assert.equal(checkSystemPromptSimilarity(scrambled, reference), true)

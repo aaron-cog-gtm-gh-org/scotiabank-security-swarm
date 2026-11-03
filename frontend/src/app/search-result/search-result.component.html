@@ -6,14 +6,51 @@
 <section class="hero" aria-label="Welcome">
   <div class="hero-inner">
     <div class="hero-greeting">
-      <h1 class="hero-hello">Hello, investor</h1>
-      <p class="hero-tier">Self-directed investing and portfolio tracking tailored to your goals. Demo profile.</p>
+      <span class="hero-eyebrow">INVESTMENTS</span>
+      <h1 class="hero-hello">Make your money work for you</h1>
+      <p class="hero-tier">Whether you’re starting your investing journey or planning your next chapter, build a portfolio that’s right for you.</p>
     </div>
-    <img class="hero-art" src="assets/public/images/CIBC_Hero_Art.svg" alt="">
+    <img class="hero-art" src="assets/public/images/Scotia_Hero_Art.svg" alt="An illustrated investment workspace with growing savings">
   </div>
 </section>
 
 <main class="container">
+  <section class="popular-accounts" aria-labelledby="popular-heading">
+    <h2 id="popular-heading">Our most popular accounts</h2>
+    <p class="demo-note">Explore your possibilities. Illustrative demo products and offers only.</p>
+    <div class="account-cards">
+      <article class="account-card">
+        <span class="account-eyebrow">SELF-DIRECTED INVESTING</span>
+        <h3>Scotia iTRADE<br>Self-Directed</h3>
+        <p class="account-price"><strong>$0</strong> per month</p>
+        <div class="account-offer"><span class="offer-badge">SPECIAL OFFER</span><p>Start building your portfolio with a selection of commission-free ETFs.</p></div>
+        <div class="account-features"><p><strong>Invest your way</strong><br>Stocks, ETFs and mutual funds</p><p><strong>Research at your fingertips</strong><br>Explore ideas for your next trade</p><p><strong>One clear view</strong><br>Track your holdings in one place</p></div>
+        <a class="account-open" routerLink="/register">Open an account</a>
+        <a class="account-details" routerLink="/search">See if it's right for you</a>
+      </article>
+      <article class="account-card">
+        <span class="account-eyebrow">TAX-FREE INVESTING</span>
+        <h3>Scotia Tax-Free<br>Savings Account</h3>
+        <p class="account-price"><strong>$0</strong> per month</p>
+        <div class="account-offer"><span class="offer-badge">SPECIAL OFFER</span><p>Make room for your goals with flexible, tax-free investment growth.</p></div>
+        <div class="account-features"><p><strong>Save for what matters</strong><br>Short-term plans or long-term goals</p><p><strong>A choice of investments</strong><br>Scotia Index Funds and GICs</p><p><strong>Flexible access</strong><br>Build a strategy around your life</p></div>
+        <a class="account-open" routerLink="/register">Open an account</a>
+        <a class="account-details" routerLink="/search">See if it's right for you</a>
+      </article>
+      <article class="account-card">
+        <span class="account-eyebrow">RETIREMENT PLANNING</span>
+        <h3>Scotia Registered<br>Retirement Savings Plan</h3>
+        <p class="account-price"><strong>$0</strong> per month</p>
+        <div class="account-offer"><span class="offer-badge">SPECIAL OFFER</span><p>Take the next step toward retirement with a diversified savings plan.</p></div>
+        <div class="account-features"><p><strong>Plan for your future</strong><br>Tax-deferred investment growth</p><p><strong>Find your balance</strong><br>Explore Scotia Private Pools</p><p><strong>Advice when you need it</strong><br>Connect with our virtual advisor</p></div>
+        <a class="account-open" routerLink="/register">Open an account</a>
+        <a class="account-details" routerLink="/chatbot">See if it's right for you</a>
+      </article>
+    </div>
+  </section>
+  <nav class="discovery-tabs" aria-label="Explore Scotiabank">
+    <a class="active" routerLink="/search">Featured</a><a routerLink="/accounts">Accounts</a><a routerLink="/saved-payment-methods">Credit cards</a><a routerLink="/wallet">Borrowing</a><a routerLink="/search">Investments</a><a routerLink="/about">Learning</a>
+  </nav>
   <nav class="hero-actions" aria-label="Quick actions">
     <a routerLink="/basket">
       <span class="tile-icon"><mat-icon>swap_horiz</mat-icon></span>
@@ -46,7 +83,7 @@
     </div>
   </div>
 
-  <div class="search-results">
+  <div class="search-results" id="investments">
     <div class="heading mat-headline-small">
       <div>
         @if (searchValue) {

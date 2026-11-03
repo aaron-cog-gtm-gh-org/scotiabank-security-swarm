@@ -8,7 +8,7 @@
 .accounts {
   display: block;
   background: #fff;
-  border: 1px solid var(--cibc-rule, #dcdcdc);
+  border: 1px solid var(--scotia-rule, #e2e2e2);
   border-radius: 4px;
   padding: $space-ml $space-m;
 
@@ -59,7 +59,7 @@
   a {
     font-size: 14px;
     font-weight: 600;
-    color: var(--cibc-red, #b43242);
+    color: var(--scotia-red, #ec111a);
     text-decoration: none;
   }
 
@@ -89,18 +89,18 @@
 }
 
 .up {
-  color: var(--cibc-gain, #0f7b4f);
+  color: var(--scotia-gain, #138636);
 }
 
 .down {
-  color: var(--cibc-loss, #c0392b);
+  color: var(--scotia-loss, #ec111a);
 }
 
 .accounts-total {
   display: flex;
   justify-content: space-between;
   padding: $space-s 0;
-  border-top: 2px solid var(--cibc-rule, #dcdcdc);
+  border-top: 2px solid var(--scotia-rule, #e2e2e2);
   font-size: 13px;
   font-weight: 600;
 }
@@ -124,7 +124,7 @@
   font-size: 13px;
   font-weight: 500;
   text-decoration: none;
-  color: var(--cibc-red, #b43242);
+  color: var(--scotia-red, #ec111a);
 
   mat-icon {
     font-size: 18px;
@@ -137,7 +137,7 @@
   }
 
   &:focus-visible {
-    outline: 2px solid var(--cibc-red, #b43242);
+    outline: 2px solid var(--scotia-red, #ec111a);
     outline-offset: 2px;
   }
 
@@ -145,14 +145,14 @@
     justify-content: center;
     margin-bottom: $space-2xs;
     padding: $space-xs $space-s;
-    border-radius: 4px;
-    background: var(--cibc-red, #b43242);
+    border-radius: 999px;
+    background: var(--scotia-red, #ec111a);
     color: #fff;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   &.primary:hover {
-    background: var(--cibc-red-dark, #8f2233);
+    background: var(--scotia-red-dark, #c8102e);
     color: #fff;
     text-decoration: none;
   }

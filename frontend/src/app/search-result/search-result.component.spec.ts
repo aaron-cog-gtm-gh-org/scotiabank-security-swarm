@@ -162,6 +162,17 @@ describe('SearchResultComponent', () => {
         expect(component).toBeTruthy()
     })
 
+    it('should present Scotia investment accounts with registration links', () => {
+        const element: HTMLElement = fixture.nativeElement
+        expect(element.querySelector('h1')?.textContent).toContain('Make your money work for you')
+        expect(element.querySelectorAll('.account-card')).toHaveLength(3)
+        expect(element.querySelectorAll('.account-open[href="/register"]')).toHaveLength(3)
+        expect(element.querySelectorAll('.offer-badge')).toHaveLength(3)
+        expect(element.querySelector('app-portfolio-overview')).toBeTruthy()
+        expect(element.querySelector('app-accounts-panel')).toBeTruthy()
+        expect(element.querySelector('app-market-ticker')).toBeTruthy()
+    })
+
     it('should render product descriptions as trusted HTML', () => {
         productService.search.mockReturnValue(of([{ description: '<script>alert("XSS")</script>' }]))
         component.ngAfterViewInit()

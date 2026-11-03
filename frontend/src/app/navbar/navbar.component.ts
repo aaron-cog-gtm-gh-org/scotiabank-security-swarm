@@ -106,9 +106,9 @@ export class NavbarComponent implements OnInit {
   public languageSearchQuery = ''
   public selectedLanguage = 'placeholder'
   public version = ''
-  public applicationName = 'OWASP Juice Shop'
+  public applicationName = 'Scotiabank Portfolio Tracker'
   public showGitHubLink = true
-  public logoSrc = 'assets/public/images/CIBCPortfolio_Logo.png'
+  public logoSrc = 'assets/public/images/Scotiabank_Logo.svg'
   public scoreBoardVisible = false
   public shortKeyLang = 'placeholder'
   public itemTotal = 0

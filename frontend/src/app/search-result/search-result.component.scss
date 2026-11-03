@@ -13,9 +13,9 @@
 }
 
 .hero {
-  margin-top: -$space-l;
+  margin-top: 0;
   margin-bottom: $space-xl;
-  background: var(--cibc-red, #b43242);
+  background: #3b0a0a;
   color: #fff;
 }
 
@@ -23,22 +23,25 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: $space-l;
-  width: 80%;
-  min-height: 280px;
+  gap: 0;
+  width: 100%;
+  min-height: 390px;
   margin: 0 auto;
 }
 
 .hero-greeting {
   display: flex;
   flex-direction: column;
-  max-width: 560px;
+  width: 50%;
+  padding: $space-3xl 5% $space-3xl 10%;
+  box-sizing: border-box;
 }
 
 .hero-hello {
   margin: 0;
   font-size: 48px;
-  font-weight: 400;
+  font-weight: 750;
+  letter-spacing: -1.7px;
   line-height: 1.15;
 }
 
@@ -49,9 +52,9 @@
 }
 
 .hero-art {
-  width: 360px;
-  max-width: 40%;
-  height: auto;
+  width: 50%;
+  height: 390px;
+  object-fit: cover;
 }
 
 .hero-actions {
@@ -66,7 +69,7 @@
     align-items: center;
     gap: $space-xs;
     text-align: center;
-    color: var(--cibc-ink, #333);
+    color: var(--scotia-ink, #333);
     text-decoration: none;
   }
 
@@ -82,8 +85,8 @@
   width: 84px;
   height: 84px;
   border-radius: 50%;
-  background: var(--cibc-mist, #f2f3f2);
-  color: var(--cibc-red, #b43242);
+  background: var(--scotia-mist, #f5f6fa);
+  color: var(--scotia-red, #ec111a);
 
   mat-icon {
     font-size: 40px;
@@ -97,7 +100,7 @@
   align-items: center;
   font-size: 19px;
   font-weight: 500;
-  color: var(--cibc-burgundy, #802741);
+  color: var(--scotia-burgundy, #3b0a0a);
 
   mat-icon {
     font-size: 22px;
@@ -115,7 +118,7 @@
 .dashboard-band {
   margin: 0 -12.5% $space-l;
   padding: $space-l 12.5%;
-  background: var(--cibc-sky, #e0e9f6);
+  background: var(--scotia-sky, #f5f6fa);
 }
 
 .dashboard-grid {
@@ -135,7 +138,7 @@
   }
 
   .hero-art {
-    display: none;
+    object-fit: cover;
   }
 }
 
@@ -153,8 +156,8 @@
   grid-template-columns: var(--investments-columns);
   column-gap: $space-m;
   padding: $space-xs $space-m;
-  background-color: var(--cibc-mist, #f2f3f2);
-  color: var(--cibc-ink, #333);
+  background-color: var(--scotia-mist, #f5f6fa);
+  color: var(--scotia-ink, #333);
   font-size: 12px;
   font-weight: 600;
 
@@ -184,7 +187,7 @@
   gap: $space-xs;
   padding: 0 0 $space-2xs;
   margin-bottom: $space-m;
-  border-bottom: 1px solid var(--cibc-rule, #dcdcdc);
+  border-bottom: 1px solid var(--scotia-rule, #e2e2e2);
   box-shadow: none;
   font-weight: 400;
 }
@@ -223,10 +226,16 @@ app-product {
 
 @media (max-width: 580px) {
   .hero-inner {
-    width: auto;
-    min-height: 200px;
-    margin: 0 $space-m;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
   }
+
+  .hero-greeting { width: 100%;
+    padding: $space-2xl $space-l; }
+
+  .hero-art { width: 100%;
+    height: 240px; }
 
   .hero-hello {
     font-size: 34px;
@@ -249,4 +258,109 @@ app-product {
   .emptyState {
     width: 100%;
   }
+}
+
+.hero-eyebrow { margin-bottom: $space-m;
+  font-size: 15px; }
+
+.popular-accounts {
+  padding: $space-m 0 $space-3xl;
+
+  h2 { font-size: 36px;
+    letter-spacing: -1px;
+    font-weight: 750;
+    margin: $space-s 0; }
+}
+
+.demo-note { color: #595959;
+  margin-bottom: $space-l; }
+
+.account-cards { display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $space-l; }
+
+.account-card {
+  display: flex;
+  flex-direction: column;
+  padding: $space-xl;
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
+  font-size: 15px;
+  line-height: 1.5;
+
+  h3 { min-height: 92px;
+    font-size: 26px;
+    line-height: 1.12;
+    letter-spacing: -0.7px;
+    margin: $space-ml 0 $space-s;
+    font-weight: 750; }
+}
+
+.account-eyebrow { color: #595959;
+  font-size: 12px; }
+
+.account-price { margin: 0 0 $space-ml;
+  font-size: 17px; }
+
+.account-offer { border-top: 1px solid #e2e2e2;
+  border-bottom: 1px solid #e2e2e2;
+  padding: $space-m 0 $space-2xs;
+  min-height: 130px; }
+
+.offer-badge { display: inline-block;
+  background: #f7c443;
+  color: #333;
+  font-size: 11px;
+  font-weight: 750;
+  border-radius: 3px;
+  padding: $space-3xs $space-xs; }
+
+.account-features { text-align: center;
+  flex: 1;
+  padding: $space-2xs 0 $space-m; }
+
+.account-card .account-open { display: block;
+  align-self: center;
+  padding: $space-m $space-l;
+  border-radius: 999px;
+  background: #ec111a;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center; }
+.account-card .account-open:hover { background: #c8102e; }
+
+.account-card .account-details { align-self: center;
+  color: #333;
+  text-decoration: underline;
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: $space-m; }
+
+.discovery-tabs { display: flex;
+  justify-content: center;
+  gap: $space-xl;
+  padding: $space-l;
+  margin-bottom: $space-xl;
+  background: #f5f6fa;
+  overflow-x: auto; }
+
+.discovery-tabs a { flex-shrink: 0;
+  color: #333;
+  padding: $space-s 0;
+  text-decoration: none;
+  border-bottom: 2px solid transparent; }
+
+.discovery-tabs .active { border-color: #ec111a;
+  font-weight: 700; }
+
+@media (max-width: 959px) {
+  .account-cards { grid-template-columns: 1fr; }
+  .account-card h3 { min-height: 0; }
+  .account-offer { min-height: 0; }
+  .hero-hello { font-size: 36px; }
+  .hero-greeting { padding-left: 5%; }
+  .discovery-tabs { justify-content: flex-start; }
 }

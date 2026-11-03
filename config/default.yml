@@ -4,10 +4,10 @@ server:
   baseUrl: 'http://localhost:3000' # used for CSAF, e.g. https://example.com
 application:
   domain: portfolio-tracker.example # for pre-loaded email users
-  name: 'CIBC Portfolio Tracker'
-  logo: CIBCPortfolio_Logo.png
-  favicon: favicon_cibc.ico
-  theme: cibc-red-burgundy       # Options: bluegrey-lightgreen blue-lightblue deeppurple-amber indigo-pink pink-bluegrey purple-green deeporange-indigo lime-green neon-fire cibc-red-burgundy
+  name: 'Scotiabank Portfolio Tracker'
+  logo: Scotiabank_Logo.svg
+  favicon: favicon_scotia.ico
+  theme: scotia-red       # Options: bluegrey-lightgreen blue-lightblue deeppurple-amber indigo-pink pink-bluegrey purple-green deeporange-indigo lime-green neon-fire scotia-red
   showVersionNumber: true
   showGitHubLinks: false
   localBackupEnabled: true
@@ -16,8 +16,8 @@ application:
   privacyContactEmail: donotreply@portfolio-tracker.example
   customMetricsPrefix: portfoliotracker
   chatBot:
-    name: 'Ava the Virtual Advisor'
-    avatar: 'CIBCAdvisorBot.png'
+    name: 'Scotia Virtual Advisor'
+    avatar: 'ScotiaAdvisorBot.png'
     model: 'gemma4:e4b'
     llmApiUrl: 'http://localhost:11434/v1'
     llmMaxRetries: 2
@@ -43,7 +43,7 @@ application:
   welcomeBanner:
     showOnFirstStart: true
     title: 'Welcome to your Portfolio Overview'
-    message: "<p><img src='assets/public/images/CIBC_Welcome_Banner.png' alt='Portfolio Tracker' style='width:100%;border-radius:6px;margin-bottom:12px;'/></p><p>Track your combined balance, asset mix and holdings across your <strong>RRSP</strong>, <strong>TFSA</strong> and <strong>Cash</strong> accounts, then build a <strong>Trade Ticket</strong> to place your next order.</p><p><em>Demo interface with mock data. Not affiliated with Canadian Imperial Bank of Commerce. Balances, quotes and holdings shown in this application are fictional and must not be used for investment decisions.</em></p>"
+    message: "<p><img src='assets/public/images/Scotia_Welcome_Banner.svg' alt='Portfolio Tracker' style='width:100%;border-radius:6px;margin-bottom:12px;'/></p><p>Track your combined balance, asset mix and holdings across your <strong>RRSP</strong>, <strong>TFSA</strong> and <strong>Cash</strong> accounts, then build a <strong>Trade Ticket</strong> to place your next order.</p><p><em>Demo interface with mock data. Not affiliated with The Bank of Nova Scotia. Balances, quotes and holdings shown in this application are fictional and must not be used for investment decisions.</em></p>"
   cookieConsent:
     message: 'This demo uses cookies to keep your session and watchlist preferences.'
     dismissText: 'Got it'
@@ -95,110 +95,110 @@ challenges:
   - 'otelcol'
 hackingInstructor:
   isEnabled: false
-  avatarImage: CIBCAdvisorBot.png
+  avatarImage: ScotiaAdvisorBot.png
   hintPlaybackSpeed: normal # Options: faster fast normal slow slower
 products:
-- name: 'Canadian Equity Index Fund (CDEQ)'
+- name: 'Scotia Canadian Index Fund (CDEQ)'
   price: 1.99
   deluxePrice: 0.99
   limitPerUser: 5
-  description: 'Core holding tracking the S&P/TSX Composite Index. Distributions are reinvested quarterly.'
+  description: 'Scotia investing demo: Core holding tracking the S&P/TSX Composite Index. Distributions are reinvested quarterly.'
   image: eq_canada.png
   reviews:
   - {text: 'One of my favorites!', author: admin}
   - {text: 'Low fee and it tracks the index closely. Reinvested distributions keep compounding nicely.', author: basil}
-- name: 'US Total Market Index Fund (USTM)'
-  description: 'Broad exposure to large-, mid- and small-cap U.S. equities, unhedged to the Canadian dollar.'
+- name: 'Scotia U.S. Index Fund (USTM)'
+  description: 'Scotia investing demo: Broad exposure to large-, mid- and small-cap U.S. equities, unhedged to the Canadian dollar.'
   price: 2.99
   deluxePrice: 2.49
   image: eq_us.png
   reviews:
   - {text: 'Cheap, broad exposure to the whole U.S. market. Watch the currency swings when it is unhedged.', author: uvogin}
-- name: 'Global Equity Growth Fund (GLBL)'
-  description: 'Developed-market growth companies outside of North America, screened for quality of earnings.'
+- name: 'Scotia iTRADE Global Equity Growth Fund (GLBL)'
+  description: 'Scotia investing demo: Developed-market growth companies outside of North America, screened for quality of earnings.'
   price: 8.99
   image: eq_global.png
   reviews:
   - {text: 'I bought it and would buy again. Growth tilt means some bumpier quarters, though.', author: admin}
-- name: 'Emerging Markets Equity Fund (EMEQ)'
-  description: 'Higher-volatility exposure across Asia, Latin America and EMEA for long-horizon accounts.'
+- name: 'Scotia iTRADE Emerging Markets Equity Fund (EMEQ)'
+  description: 'Scotia investing demo: Higher-volatility exposure across Asia, Latin America and EMEA for long-horizon accounts.'
   price: 4.99
   image: eq_emerging.png
-- name: 'Dividend Growers Fund (DIVG)'
-  description: 'Canadian and U.S. issuers with a multi-decade record of raising their dividends.'
+- name: 'Scotia iTRADE Dividend Growers Fund (DIVG)'
+  description: 'Scotia investing demo: Canadian and U.S. issuers with a multi-decade record of raising their dividends.'
   price: 2.99
   deluxePrice: 1.99
   limitPerUser: 5
   image: eq_dividend.png
-- name: 'Money Market Fund (CASH)'
-  description: 'Parks idle settlement cash in short-dated treasury bills at competitive overnight rates.'
+- name: 'Scotia Momentum PLUS Savings (CASH)'
+  description: 'Scotia Momentum PLUS Savings demo holding for cash set aside toward your next investing goal. Illustrative rates and balances only.'
   price: 1.99
   image: cash_money_market.png
   reviews:
   - {text: 'Does exactly what it should: keeps idle cash earning something until I place the next order.', author: bender}
-- name: 'Balanced Growth Portfolio (BALG)'
-  description: 'A 60/40 mix of global equities and investment-grade bonds, rebalanced automatically.'
+- name: 'Scotia Private Pools Balanced Growth (BALG)'
+  description: 'Scotia investing demo: A 60/40 mix of global equities and investment-grade bonds, rebalanced automatically.'
   price: 22.49
   limitPerUser: 5
   image: balanced_growth.png
-- name: 'Conservative Income Portfolio (CINC)'
-  description: 'Bond-weighted portfolio for investors close to drawdown who still want some equity exposure.'
+- name: 'Scotia Private Pools Conservative Income (CINC)'
+  description: 'Scotia investing demo: Bond-weighted portfolio for investors close to drawdown who still want some equity exposure.'
   price: 22.49
   image: balanced_income.png
-- name: 'Global Security and Identity Technology Fund (GSEC)'
-  description: 'Holds listed vendors in application security, identity management and secure communications.'
+- name: 'Scotia iTRADE Global Security and Identity Technology Fund (GSEC)'
+  description: 'Scotia investing demo: Holds listed vendors in application security, identity management and secure communications.'
   price: 0.01
   image: eq_security.png
   urlForProductTamperingChallenge: 'https://www.owasp.org/index.php/O-Saft'
-- name: 'Year-End Bonus Cash Bundle (2014 Series)'
-  description: 'Contains a surprise assortment of maturing GIC positions and a one-time loyalty bonus at a price you will not see again!'
+- name: 'Scotia iTRADE Year-End Bonus Cash Bundle (2014 Series)'
+  description: 'Scotia investing demo: Contains a surprise assortment of maturing GIC positions and a one-time loyalty bonus at a price you will not see again!'
   price: 29.99
   image: undefined.jpg
   useForChristmasSpecialChallenge: true
-- name: 'Rippertuer Special Situations Fund'
-  description: 'A concentrated basket of unlisted frontier-market agricultural positions.<br/><span style="color:darkred;">Sold out due to suitability review!</span>'
+- name: 'Scotia iTRADE Rippertuer Special Situations Fund'
+  description: 'Scotia investing demo: A concentrated basket of unlisted frontier-market agricultural positions.<br/><span style="color:darkred;">Sold out due to suitability review!</span>'
   price: 16.99
   image: undefined.jpg
   keywordsForPastebinDataLeakChallenge:
   - hueteroneel
   - eurogium edule
-- name: 'Preferred Share Series A (2015/2016 issue)'
-  description: 'Rate-reset preferred shares from the 2015/2016 issuance window. No longer offered to new accounts.'
+- name: 'Scotia iTRADE Preferred Share Series A (2015/2016 issue)'
+  description: 'Scotia investing demo: Rate-reset preferred shares from the 2015/2016 issuance window. No longer offered to new accounts.'
   price: 999.99
   image: pref_shares.png
   deletedDate: '2017-04-28'
-- name: 'Sector Rotation Model Portfolio (16 positions)'
-  description: 'Momentum-driven rotation across the eleven GICS sectors with a cash overlay.'
+- name: 'Scotia iTRADE Sector Rotation Model Portfolio (16 positions)'
+  description: 'Scotia investing demo: Momentum-driven rotation across the eleven GICS sectors with a cash overlay.'
   price: 14.99
   image: eq_financials.png
-- name: 'Quarterly Rebalancing Service (16 accounts)'
-  description: 'Automated rebalancing back to your target asset mix at the end of every quarter.'
+- name: 'Scotia iTRADE Quarterly Rebalancing Service (16 accounts)'
+  description: 'Scotia investing demo: Automated rebalancing back to your target asset mix at the end of every quarter.'
   price: 15.99
   image: infrastructure.png
-- name: 'Model Portfolio Fact Sheet Bundle'
-  description: 'Fact sheets for the full line-up of model portfolios, including holdings and fee breakdowns.'
+- name: 'Scotia iTRADE Model Portfolio Fact Sheet Bundle'
+  description: 'Scotia investing demo: Fact sheets for the full line-up of model portfolios, including holdings and fee breakdowns.'
   price: 9.99
   image: research_report.png
-- name: 'Single Fund Fact Sheet'
-  description: 'One-page summary of objectives, performance, risk rating and management expense ratio.'
+- name: 'Scotia iTRADE Single Fund Fact Sheet'
+  description: 'Scotia investing demo: One-page summary of objectives, performance, risk rating and management expense ratio.'
   price: 4.99
   image: research_report.png
-- name: 'Portfolio Rebalancing Alerts (16 triggers)'
-  description: 'Notifies you whenever a holding drifts more than five percent from its target weight.'
+- name: 'Scotia iTRADE Portfolio Rebalancing Alerts (16 triggers)'
+  description: 'Scotia investing demo: Notifies you whenever a holding drifts more than five percent from its target weight.'
   price: 14.99
   image: research_report.png
   reviews:
   - {text: 'The drift alerts fired before my allocation wandered too far. Set it and forget it.', author: rapper}
-- name: 'Real Estate Income Fund (REIT)'
-  description: 'Canadian and global real estate investment trusts held for their monthly distributions.'
+- name: 'Scotia iTRADE Real Estate Income Fund (REIT)'
+  description: 'Scotia investing demo: Canadian and global real estate investment trusts held for their monthly distributions.'
   price: 21.99
   image: reit_fund.png
-- name: 'Infrastructure Income Fund (INFR)'
-  description: 'Toll roads, pipelines and regulated utilities with inflation-linked revenue.'
+- name: 'Scotia iTRADE Infrastructure Income Fund (INFR)'
+  description: 'Scotia investing demo: Toll roads, pipelines and regulated utilities with inflation-linked revenue.'
   price: 49.99
   image: infrastructure.png
-- name: 'Sustainable Equity Fund (ESGF)'
-  description: 'Equities screened on emissions intensity, board independence and labour practices.'
+- name: 'Scotia iTRADE Sustainable Equity Fund (ESGF)'
+  description: 'Scotia investing demo: Equities screened on emissions intensity, board independence and labour practices.'
   price: 2.92
   quantity: 5
   limitPerUser: 5
@@ -206,94 +206,94 @@ products:
   reviews:
   - {text: 'Reasonable fee for the screens applied. Holdings list matches the stated ESG criteria.', author: rapper}
   - {text: 'Bought a small position for my TFSA. Liquidity is thin, so expect wider spreads.', author: jim}
-- name: 'Woodruff Agricultural Futures Note "Forest Master X-Treme"'
-  description: 'A structured note linked to a basket of specialty crop futures. Capital is not protected.'
+- name: 'Scotia iTRADE Woodruff Agricultural Futures Note "Forest Master X-Treme"'
+  description: 'Scotia investing demo: A structured note linked to a basket of specialty crop futures. Capital is not protected.'
   price: 6.99
   image: structured_note.png
-- name: 'Green Transition Equity Fund'
-  description: 'Small allocation to renewable generation, storage and grid modernisation names.'
+- name: 'Scotia iTRADE Green Transition Equity Fund'
+  description: 'Scotia investing demo: Small allocation to renewable generation, storage and grid modernisation names.'
   price: 1.99
   image: eq_energy.png
   reviews:
   - {text: 'Small allocation, but the underlying holdings are genuinely new-economy names.', author: jim}
-- name: 'Real Return Bond Fund (RRBD)'
-  description: 'Federal bonds whose principal is indexed to the Canadian consumer price index.'
+- name: 'Scotia iTRADE Real Return Bond Fund (RRBD)'
+  description: 'Scotia investing demo: Federal bonds whose principal is indexed to the Canadian consumer price index.'
   price: 4.99
   image: bond_real_return.png
-- name: 'Fractional Share Residual Account'
-  description: 'Holds the fractional units left over after dividend reinvestment until they can be combined.'
+- name: 'Scotia iTRADE Fractional Share Residual Account'
+  description: 'Scotia investing demo: Holds the fractional units left over after dividend reinvestment until they can be combined.'
   price: 0.89
   limitPerUser: 5
   image: cash_money_market.png
-- name: 'Self-Directed Trading Platform Licence'
-  description: 'Annual licence for the advanced order-entry and streaming-quote workstation.'
+- name: 'Scotia iTRADE Self-Directed Trading Platform Licence'
+  description: 'Scotia investing demo: Annual licence for the advanced order-entry and streaming-quote workstation.'
   price: 89.99
   image: webinar_seat.png
-- name: 'Asset Mix Blueprint (3D-printed model)'
-  description: 'A printed desk model of our recommended strategic asset mix, produced from the published blueprint.'
+- name: 'Scotia iTRADE Asset Mix Blueprint (3D-printed model)'
+  description: 'Scotia investing demo: A printed desk model of our recommended strategic asset mix, produced from the published blueprint.'
   price: 99.99
   image: 3d_keychain.jpg   # Exif metadata contains "OpenSCAD" as subtle hint...
   fileForRetrieveBlueprintChallenge: JuiceShop.stl   # ...to blueprint file type
   exifForBlueprintChallenge:
   - OpenSCAD
-- name: 'Investor Confidence Index Artwork'
-  description: 'A framed print of the investor confidence index over the past two decades.'
+- name: 'Scotia iTRADE Investor Confidence Index Artwork'
+  description: 'Scotia investing demo: A framed print of the investor confidence index over the past two decades.'
   price: 278.74
   quantity: 0
   image: research_report.png
   deletedDate: '2020-12-24'
-- name: 'Advisor of the Year 2017 Nomination'
-  description: 'Nomination certificate from the 2017 advisor awards. Kept for archival purposes only.'
+- name: 'Scotia iTRADE Advisor of the Year 2017 Nomination'
+  description: 'Scotia investing demo: Nomination certificate from the 2017 advisor awards. Kept for archival purposes only.'
   price: 0.03
   image: webinar_seat.png
   deletedDate: '2017-07-01'
-- name: 'Strategic Bond Ladder Fund (SBND)'
-  description: 'A five-rung ladder of federal and provincial bonds maturing within five years.'
+- name: 'Scotia iTRADE Strategic Bond Ladder Fund (SBND)'
+  description: 'Scotia investing demo: A five-rung ladder of federal and provincial bonds maturing within five years.'
   price: 3.99
   image: bond_short.png
-- name: 'Aggregate Bond Index Fund (AGGB)'
-  description: 'Broad investment-grade Canadian bond market exposure at a low management fee.'
+- name: 'Scotia iTRADE Aggregate Bond Index Fund (AGGB)'
+  description: 'Scotia investing demo: Broad investment-grade Canadian bond market exposure at a low management fee.'
   price: 2.99
   image: bond_aggregate.png
   reviews:
   - {text: 'One star for the confusing fee disclosure; the fund itself tracks the index fine.', author: uvogin}
-- name: 'Sweden Tour 2017 Investor Seminar Pass (Special Edition)'
-  description: 'Seminar pass from the 2017 Nordic investor tour. Registration has closed.'
+- name: 'Scotia iTRADE Sweden Tour 2017 Investor Seminar Pass (Special Edition)'
+  description: 'Scotia investing demo: Seminar pass from the 2017 Nordic investor tour. Registration has closed.'
   price: 19.1
   image: webinar_seat.png
   deletedDate: '2017-09-20'
-- name: 'The True Cost of Fees (Research Paper)'
-  description: 'Research paper on how management expense ratios compound against you over thirty years.'
+- name: 'Scotia iTRADE The True Cost of Fees (Research Paper)'
+  description: 'Scotia investing demo: Research paper on how management expense ratios compound against you over thirty years.'
   price: 5.99
   image: research_report.png
   reviews:
   - {text: 'Eye-opening read on how a two percent MER compounds over thirty years. Worth the price.', author: morty}
-- name: 'Melon Mobility Growth Fund (2018 Comeback Edition)'
-  description: 'Concentrated position in urban mobility manufacturers. Limited to one unit per account.'
+- name: 'Scotia iTRADE Melon Mobility Growth Fund (2018 Comeback Edition)'
+  description: 'Scotia investing demo: Concentrated position in urban mobility manufacturers. Limited to one unit per account.'
   price: 2999
   quantity: 3
   limitPerUser: 1
   image: eq_tech.png
-- name: 'Quarterly Statement Archive (10 years)'
-  description: 'Consolidated PDF archive of ten years of quarterly account statements.'
+- name: 'Scotia iTRADE Quarterly Statement Archive (10 years)'
+  description: 'Scotia investing demo: Consolidated PDF archive of ten years of quarterly account statements.'
   price: 19.99
   quantity: 0
   image: research_report.png
-- name: 'Risk Ladder Workshop - Web Applications'
-  description: 'A tabletop workshop on operational risk in customer-facing web applications.'
+- name: 'Scotia iTRADE Risk Ladder Workshop - Web Applications'
+  description: 'Scotia investing demo: A tabletop workshop on operational risk in customer-facing web applications.'
   price: 0.01
   quantity: 8
   image: webinar_seat.png
   reviews:
   - {text: 'Wait for the free community edition of this workshop; the paid seat adds little.', author: bjoernOwasp}
-- name: 'Risk Ladder Workshop - Mobile Apps'
-  description: 'The mobile edition of the operational risk workshop, including a device handling session.'
+- name: 'Scotia iTRADE Risk Ladder Workshop - Mobile Apps'
+  description: 'Scotia investing demo: The mobile edition of the operational risk workshop, including a device handling session.'
   price: 0.01
   quantity: 0
   image: webinar_seat.png
   reviews:
   - {text: 'Covers mobile-specific operational risks well. The device handling session is the best part.', author: rapper}
-- name: 'Holographic Performance Certificate'
+- name: 'Scotia iTRADE Holographic Performance Certificate'
   description: "A holographic certificate recognising a full decade of uninterrupted contributions."
   price: 2.00
   quantity: 0
@@ -302,7 +302,7 @@ products:
   - {text: 'Nice touch for the ten-year milestone. Framing quality is decent for the price.', author: rapper}
   - {text: 'Arrived well packaged. A small but appreciated recognition of long-term contributions.', author: jim}
   - {text: 'Hangs nicely in my office. Would prefer a digital version alongside the print.', author: bender}
-- name: '"King of the Hill" Trading Desk Facemask'
+- name: 'Scotia iTRADE "King of the Hill" Trading Desk Facemask'
   description: "Branded facemask from the trading floor. Out of stock and not being reordered."
   price: 13.49
   quantity: 0
@@ -311,8 +311,8 @@ products:
   reviews:
   - {text: 'Comfortable and does the job on the trading floor. Pity it is discontinued.', author: uvogin}
   - {text: 'Standard branded merchandise. Nothing special, but serviceable.', author: bender}
-- name: 'Market Adversary Trading Card (Common)'
-  description: 'Collectible card depicting a common market hazard. Withdrawn from the catalogue.'
+- name: 'Scotia iTRADE Market Adversary Trading Card (Common)'
+  description: 'Scotia investing demo: Collectible card depicting a common market hazard. Withdrawn from the catalogue.'
   price: 2.99
   deluxePrice: 0.99
   deletedDate: '2020-11-30'
@@ -320,8 +320,8 @@ products:
   image: structured_note.png
   reviews:
   - {text: 'A fun bit of memorabilia. The common edition is priced fairly.', author: bender}
-- name: 'Market Adversary Trading Card (Super Rare)'
-  description: 'Collectible card depicting a rare market hazard. Withdrawn from the catalogue.'
+- name: 'Scotia iTRADE Market Adversary Trading Card (Super Rare)'
+  description: 'Scotia investing demo: Collectible card depicting a rare market hazard. Withdrawn from the catalogue.'
   price: 99.99
   deluxePrice: 69.99
   deletedDate: '2020-11-30'
@@ -330,48 +330,48 @@ products:
   image: precious_metals.png
   reviews:
   - {text: 'Too expensive for what it is, but the rare edition does hold its collector value.', author: bender}
-- name: '"Permafrost" Frozen Rate GIC (2020 Edition)'
-  description: 'A single remaining unit of the 2020 frozen-rate guaranteed investment certificate.'
+- name: 'Scotia iTRADE "Permafrost" Frozen Rate GIC (2020 Edition)'
+  description: 'Scotia investing demo: A single remaining unit of the 2020 frozen-rate guaranteed investment certificate.'
   price: 9999.99
   quantity: 1
   limitPerUser: 1
   image: gic_5yr.png
   reviews:
   - {text: 'Locked in a strong rate before the cuts. Glad I grabbed one of the last units.', author: rapper}
-- name: 'Best Advisor Artwork'
-  description: 'An oil painting of a very persuasive advisor, mounted in a gilded frame.'
+- name: 'Scotia iTRADE Best Advisor Artwork'
+  description: 'Scotia investing demo: An oil painting of a very persuasive advisor, mounted in a gilded frame.'
   price: 5000
   quantity: 1
   image: eq_dividend.png
   reviews:
   - {text: 'Striking piece, though the price reflects the frame more than the art itself.', author: stan}
   - {text: 'Overpriced for a lobby print, but it does look impressive in person.', author: bender}
-- name: 'Founding Investor Card (non-foil)'
-  description: 'Membership card issued to founding investors. Three remain in circulation.'
+- name: 'Scotia iTRADE Founding Investor Card (non-foil)'
+  description: 'Scotia investing demo: Membership card issued to founding investors. Three remain in circulation.'
   price: 1000
   quantity: 3
   limitPerUser: 1
   image: gic_cashable.png
   reviews:
   - {text: 'Keep it sealed and stored properly. These early membership cards hold their value well.', author: accountant}
-- name: '20th Anniversary Investor Celebration Ticket'
-  description: 'Ticket to the twentieth anniversary investor celebration. The event has already taken place.'
+- name: 'Scotia iTRADE 20th Anniversary Investor Celebration Ticket'
+  description: 'Scotia investing demo: Ticket to the twentieth anniversary investor celebration. The event has already taken place.'
   price: 0.00000000000000000001
   deletedDate: '2021-09-25'
   limitPerUser: 1
   image: webinar_seat.png
   reviews:
   - {text: "I'll be there! Will you, too?", author: bjoernOwasp}
-- name: 'Compounding Brick Tower (Investor Lobby Model)'
-  description: 'A brick-built tower visualising twenty years of compounding, assembled by our team.'
+- name: 'Scotia iTRADE Compounding Brick Tower (Investor Lobby Model)'
+  description: 'Scotia investing demo: A brick-built tower visualising twenty years of compounding, assembled by our team.'
   price: 799
   quantity: 3
   limitPerUser: 1
   image: infrastructure.png
   reviews:
   - {text: 'The lobby model really makes twenty years of compounding tangible. Worth seeing in person.', author: bjoernOwasp}
-- name: 'Portfolio Maturity Assessment Day Ticket'
-  description: 'Seat at the annual maturity assessment day for self-directed investors. Registration has closed.'
+- name: 'Scotia iTRADE Portfolio Maturity Assessment Day Ticket'
+  description: 'Scotia investing demo: Seat at the annual maturity assessment day for self-directed investors. Registration has closed.'
   price: 55.20
   deletedDate: '2024-09-26'
   limitPerUser: 1
@@ -379,46 +379,46 @@ products:
   reviews:
   - {text: 'The live maturity assessment session alone was worth the ticket price.', author: timo}
   - {text: 'Great lineup of speakers. The portfolio showcase was a highlight.', author: jannik}
-- name: 'Health Care Innovation Fund (HLTH)'
-  description: 'Global pharmaceutical, medical device and managed care holdings.'
+- name: 'Scotia iTRADE Health Care Innovation Fund (HLTH)'
+  description: 'Scotia investing demo: Global pharmaceutical, medical device and managed care holdings.'
   price: 2.99
   image: eq_healthcare.png
-- name: 'Target Date 2045 Portfolio (T45F)'
-  description: 'Glide-path portfolio that shifts from equities to bonds as 2045 approaches.'
+- name: 'Scotia iTRADE Target Date 2045 Portfolio (T45F)'
+  description: 'Scotia investing demo: Glide-path portfolio that shifts from equities to bonds as 2045 approaches.'
   price: 2.49
   image: target_2045.png
-- name: 'Corporate Bond Fund (CORP)'
-  description: 'Investment-grade corporate credit with an average duration of six years.'
+- name: 'Scotia iTRADE Corporate Bond Fund (CORP)'
+  description: 'Scotia investing demo: Investment-grade corporate credit with an average duration of six years.'
   price: 2.99
   image: bond_corporate.png
-- name: 'Precious Metals Certificate (GOLD)'
-  description: 'Allocated bullion certificate held with a Canadian custodian.'
+- name: 'Scotia iTRADE Precious Metals Certificate (GOLD)'
+  description: 'Scotia investing demo: Allocated bullion certificate held with a Canadian custodian.'
   price: 3.99
   image: precious_metals.png
-- name: 'Aggressive Growth Portfolio (AGGR)'
-  description: 'Ninety percent global equity for accounts with a very long time horizon.'
+- name: 'Scotia iTRADE Aggressive Growth Portfolio (AGGR)'
+  description: 'Scotia investing demo: Ninety percent global equity for accounts with a very long time horizon.'
   price: 3.49
   image: portfolio_aggressive.png
-- name: 'Basil Small-Cap Discovery Fund'
-  description: 'Under-followed Canadian small caps selected by our fundamental research desk.'
+- name: 'Scotia iTRADE Basil Small-Cap Discovery Fund'
+  description: 'Scotia investing demo: Under-followed Canadian small caps selected by our fundamental research desk.'
   price: 2.99
   image: eq_canada.png
   reviews:
   - {text: 'Genuinely under-followed names. Volatile, but the research desk picks have been solid.', author: basil}
-- name: '1-Year Guaranteed Investment Certificate'
-  description: 'Principal-protected certificate with interest paid at maturity.'
+- name: 'Scotia 1-Year GIC'
+  description: 'Scotia investing demo: Principal-protected certificate with interest paid at maturity.'
   price: 2.49
   image: gic_1yr.png
-- name: 'Cashable Guaranteed Investment Certificate'
-  description: 'Redeemable after thirty days without penalty, at a slightly lower posted rate.'
+- name: 'Scotia Cashable GIC'
+  description: 'Scotia investing demo: Redeemable after thirty days without penalty, at a slightly lower posted rate.'
   price: 3.29
   image: gic_cashable.png
-- name: 'Energy Infrastructure Fund (ENRG)'
-  description: 'Midstream energy and gas distribution names held primarily for yield.'
+- name: 'Scotia iTRADE Energy Infrastructure Fund (ENRG)'
+  description: 'Scotia investing demo: Midstream energy and gas distribution names held primarily for yield.'
   price: 3.99
   image: eq_energy.png
-- name: 'Technology Leaders Fund (TECH)'
-  description: 'Large-cap software, semiconductor and platform companies across developed markets.'
+- name: 'Scotia iTRADE Technology Leaders Fund (TECH)'
+  description: 'Scotia investing demo: Large-cap software, semiconductor and platform companies across developed markets.'
   price: 4.49
   image: eq_tech.png
 memories:

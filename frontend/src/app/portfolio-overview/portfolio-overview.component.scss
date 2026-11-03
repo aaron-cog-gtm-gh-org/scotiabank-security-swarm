@@ -22,7 +22,7 @@
 }
 
 .currency {
-  color: var(--cibc-red, #b43242);
+  color: var(--scotia-red, #ec111a);
   font-weight: 600;
 }
 
@@ -32,7 +32,7 @@
 
 .overview {
   background: #fff;
-  border: 1px solid var(--cibc-rule, #dcdcdc);
+  border: 1px solid var(--scotia-rule, #e2e2e2);
   border-radius: 4px;
   padding: $space-ml;
 }
@@ -65,7 +65,7 @@
 
   .sub {
     font-size: 12px;
-    color: var(--cibc-red, #b43242);
+    color: var(--scotia-red, #ec111a);
   }
 }
 
@@ -97,11 +97,11 @@
 }
 
 .up {
-  color: var(--cibc-gain, #0f7b4f);
+  color: var(--scotia-gain, #138636);
 }
 
 .down {
-  color: var(--cibc-loss, #c0392b);
+  color: var(--scotia-loss, #ec111a);
 }
 
 .asset-mix {

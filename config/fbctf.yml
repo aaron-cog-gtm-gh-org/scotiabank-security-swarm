@@ -1,6 +1,6 @@
 application:
-  logo: CIBCPortfolio_Logo.png
-  favicon: favicon_cibc.ico
+  logo: Scotiabank_Logo.svg
+  favicon: favicon_scotia.ico
   showVersionNumber: false
   showGitHubLinks: false
   localBackupEnabled: false

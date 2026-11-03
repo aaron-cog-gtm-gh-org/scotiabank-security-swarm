@@ -10,7 +10,7 @@ mat-toolbar {
   min-width: 100%;
   padding: 0;
   width: 100%;
-  margin-bottom: $space-l;
+  margin-bottom: 0;
 }
 
 .mat-mdc-button {
@@ -22,7 +22,7 @@ mat-toolbar {
   display: flex;
   flex-direction: column;
   background: #fff;
-  color: var(--cibc-ink, #333);
+  color: var(--scotia-ink, #333);
   box-shadow: none;
 }
 
@@ -31,19 +31,29 @@ mat-toolbar {
   min-height: 2.5rem;
   height: 2.5rem;
   padding: 0 10%;
-  background: var(--cibc-burgundy, #802741);
-  color: #fff;
+  background: #f5f6fa;
+  border-bottom: 1px solid #e2e2e2;
+  color: #333;
 }
 
 .utility-links {
   display: flex;
-  gap: $space-l;
+  gap: $space-ml;
 
   a {
     font-size: 14px;
     font-weight: 500;
-    color: #fff;
+    color: #333;
     text-decoration: none;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .active {
+    border-bottom: 2px solid #ec111a;
+    font-weight: 700;
   }
 
   a:hover {
@@ -54,7 +64,7 @@ mat-toolbar {
 .utility-language {
   height: 2.5rem;
   margin-left: auto;
-  color: #fff !important;
+  color: #333 !important;
   font-size: 14px;
 
   mat-icon {
@@ -65,18 +75,20 @@ mat-toolbar {
 .navbar-row {
   align-items: center;
   display: grid;
-  grid-template-columns: auto auto 1fr auto;
-  min-height: 6rem;
-  padding: $space-xs 10%;
-  color: var(--cibc-ink, #333);
+  grid-template-columns: auto 1fr auto;
+  height: auto;
+  min-height: 108px;
+  padding: $space-m 6%;
+  gap: $space-l;
+  color: var(--scotia-ink, #333);
 }
 
 .subnav-row {
   justify-content: center;
   min-height: 3.5rem;
-  padding: 0 $space-s;
-  border-top: 1px solid var(--cibc-rule, #dcdcdc);
-  border-bottom: 1px solid var(--cibc-rule, #dcdcdc);
+  padding: 0 5%;
+  border-top: 1px solid var(--scotia-rule, #e2e2e2);
+  border-bottom: 1px solid var(--scotia-rule, #e2e2e2);
   background: #fff;
 }
 
@@ -84,22 +96,22 @@ mat-toolbar {
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
-  gap: $space-xl;
+  gap: $space-s;
   overflow-x: auto;
   scrollbar-width: none;
 }
 
 .subnav-link {
   height: 3.5rem;
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 400;
   border-bottom: 3px solid transparent;
   border-radius: 0;
-  color: var(--cibc-ink, #333) !important;
+  color: var(--scotia-ink, #333) !important;
 
   &:hover,
   &.active {
-    border-bottom-color: var(--cibc-red, #b43242);
+    border-bottom-color: var(--scotia-red, #ec111a);
   }
 }
 
@@ -134,8 +146,8 @@ mat-toolbar {
 }
 
 .logo {
-  max-height: 40px;
-  width: auto;
+  height: 36px;
+  width: 210px;
 }
 
 #homeButton {
@@ -157,14 +169,15 @@ mat-toolbar {
 .search-area {
   align-items: center;
   display: flex;
-  justify-content: flex-end;
-  margin-left: $space-m;
+  justify-content: center;
+  margin-left: 0;
   min-width: 0;
 }
 
 .navbar-actions {
   align-items: center;
   display: flex;
+  gap: $space-ml;
 }
 
 .language-select {
@@ -209,6 +222,7 @@ app-mat-search-bar {
   height: 3rem;
   justify-content: center;
   width: 3rem;
+  display: none;
 }
 
 .nav-home-button {
@@ -217,7 +231,14 @@ app-mat-search-bar {
 }
 
 .nav-icon-button {
-  color: var(--cibc-red, #b43242) !important;
+  color: #333 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-xs;
+  text-decoration: none;
+  font-size: 13px;
+  white-space: nowrap;
 
   mat-icon {
     font-size: 28px;
@@ -227,43 +248,44 @@ app-mat-search-bar {
 }
 
 .nav-account-button {
-  height: 3rem;
-  margin-left: $space-m;
+  height: 50px;
+  min-width: 175px;
+  margin-left: 0;
   padding: 0 $space-m;
   border-radius: 4px;
-  background-color: var(--cibc-red, #b43242) !important;
+  background-color: var(--scotia-red, #ec111a) !important;
   color: #fff !important;
   font-size: 17px;
-  font-weight: 500;
+  font-weight: 700;
   vertical-align: middle;
 
   &:hover {
-    background-color: var(--cibc-red-dark, #8f2233) !important;
+    background-color: var(--scotia-red-dark, #c8102e) !important;
   }
 }
 
 .enrol-prompt {
   display: flex;
-  flex-direction: column;
-  margin: 0 $space-m 0 $space-s;
-  font-size: 15px;
+  gap: $space-3xs;
+  margin: $space-2xs 0 0;
+  font-size: 11px;
   line-height: 1.4;
   white-space: nowrap;
 
   a {
-    color: var(--cibc-ink, #333);
+    font-weight: 700;
+    color: var(--scotia-ink, #333);
     text-decoration: underline;
     text-underline-offset: 3px;
   }
 }
 
 .app-name {
-  font-size: 17px;
-  font-weight: 400;
-  color: var(--cibc-ink, #333);
-  margin-left: $space-s;
-  padding-left: $space-s;
-  border-left: 1px solid var(--cibc-rule, #dcdcdc);
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
 }
 
 .basket-label {
@@ -293,14 +315,25 @@ app-mat-search-bar {
 }
 
 .navbar-actions .mat-mdc-button {
-  color: var(--cibc-ink, #333);
+  color: var(--scotia-ink, #333);
 }
 
 .navbar-actions app-mat-search-bar {
-  color: var(--cibc-red, #b43242);
+  color: var(--scotia-red, #ec111a);
 }
 
 @media screen and (max-width: 959px) {
+  .nav-square-button { display: flex; }
+
+  .navbar-row {
+    gap: $space-s;
+    grid-template-columns: auto auto 1fr auto;
+  }
+  .navbar-actions { gap: $space-xs; }
+  .search-area { margin: 0; }
+  .enrol-prompt { display: none; }
+  .nav-account-button { min-width: 100px; }
+
   .utility-row,
   .navbar-row {
     padding-left: $space-s;
@@ -322,9 +355,41 @@ app-mat-search-bar {
 }
 
 @media screen and (max-width: 599.98px) {
+  .navbar-row { grid-template-columns: auto 1fr auto; }
+
+  .search-area { grid-row: 2;
+    grid-column: 1 / -1;
+    width: 100%; }
+  .logo { width: 170px; }
+
   .logo {
     max-height: 28px;
   }
+}
+
+.more-sites {
+  font-size: 14px;
+  color: #333 !important;
+  text-decoration: none;
+  margin-left: auto;
+}
+
+.sign-in-area { text-align: center; }
+
+:host ::ng-deep app-mat-search-bar {
+  width: 100%;
+  max-width: 290px;
+
+  .search-container {
+    border: 1px solid #e2e2e2;
+    border-radius: 6px;
+    background: #fff;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  input { font-size: 15px; }
+  .search-close { display: none; }
 }
 
 @media screen and (max-width: 959px) and (min-width: 600px) {

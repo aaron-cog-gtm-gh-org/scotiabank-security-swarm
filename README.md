@@ -1,11 +1,11 @@
-# ![CIBC Portfolio Tracker Logo](frontend/src/assets/public/images/CIBCPortfolio_Logo.png) CIBC Portfolio Tracker
+# ![Scotiabank Portfolio Tracker Logo](frontend/src/assets/public/images/Scotiabank_Logo.svg) Scotiabank Portfolio Tracker
 
 A self-directed investing portfolio dashboard used as an **application security training target**. The UI presents a
 portfolio overview, account list, market ticker and an investment catalogue with a Trade Ticket checkout flow — and it
 is deliberately riddled with vulnerabilities spanning the
 [OWASP Top Ten](https://owasp.org/www-project-top-ten) and beyond, so it can be attacked, scanned and used in demos.
 
-> Demo interface with mock data. Not affiliated with Canadian Imperial Bank of Commerce. Balances, quotes and holdings are fictional.
+> Demo interface with mock data. Not affiliated with The Bank of Nova Scotia. Balances, quotes and holdings are fictional.
 
 > **Never deploy this application to a public host or to any network you care about.** It is insecure by design. The
 > files under `infrastructure/` and `terraform/` are intentionally insecure teaching material — use the root
@@ -22,7 +22,7 @@ npm install
 npm start
 ```
 
-The application is then available on <http://localhost:3000>. No `NODE_ENV` is required — the CIBC Portfolio Tracker
+The application is then available on <http://localhost:3000>. No `NODE_ENV` is required — the Scotiabank Portfolio Tracker
 branding, theme and investment catalogue are the default configuration in `config/default.yml`.
 
 ### Docker
@@ -34,7 +34,7 @@ docker run --rm -p 3000:3000 investment-portfolio
 
 ## Configuration
 
-`config/default.yml` holds the application name, theme (`cibc-red-burgundy`), logo, favicon, welcome banner, chatbot
+`config/default.yml` holds the application name, theme (`scotia-red`), logo, favicon, welcome banner, chatbot
 persona and the investment product catalogue, including the metadata that individual challenges depend on.
 
 The remaining profiles are selected with `NODE_ENV=<name>` and exist for specific training modes rather than for
