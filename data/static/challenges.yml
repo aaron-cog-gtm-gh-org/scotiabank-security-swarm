@@ -26,6 +26,58 @@
   disabledEnv:
     - Docker
     - Heroku
+
+-
+  name: 'Other People''s Money'
+  category: 'Broken Access Control'
+  description: 'Transfer money from a bank account that belongs to another customer.'
+  difficulty: 3
+  tags:
+    - Code Analysis
+  hints:
+    - 'An account identifier is not proof that you own the account.'
+    - 'Inspect the account IDs used by the transfer form and try another customer''s account.'
+  mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html'
+  key: etransferBolaChallenge
+
+-
+  name: 'Double Spend'
+  category: 'Broken Anti Automation'
+  description: 'Overdraw a bank account by racing multiple e-Transfer requests through the balance check.'
+  difficulty: 4
+  tags:
+    - Brute Force
+  hints:
+    - 'A balance check and a debit should be one atomic operation.'
+    - 'Send several identical transfers at the same time and inspect the source balance.'
+  mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Transaction_Management_Cheat_Sheet.html'
+  key: etransferRaceChallenge
+
+-
+  name: 'Points from Nothing'
+  category: 'Improper Input Validation'
+  description: 'Redeem a negative quantity of Scene+ rewards to increase your points balance.'
+  difficulty: 2
+  tags:
+    - Contraption
+  hints:
+    - 'The quantity control in the UI is not the validation boundary.'
+    - 'What happens when the quantity is less than zero?'
+  mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html'
+  key: sceneNegativeRedeemChallenge
+
+-
+  name: 'Wrap Around Rewards'
+  category: 'Improper Input Validation'
+  description: 'Use integer overflow in the Scene+ points ledger to turn a large positive redemption into a negative cost.'
+  difficulty: 4
+  tags:
+    - Code Analysis
+  hints:
+    - 'The points ledger stores signed 32-bit integers.'
+    - 'Try a very large positive quantity and inspect the calculated cost.'
+  mitigationUrl: 'https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html'
+  key: sceneOverflowChallenge
 -
   name: 'Access Log'
   category: 'Observability Failures'

@@ -362,3 +362,15 @@ ctf:
     vulnerableDockerImageChallenge:
       name: Portugal
       code: PT
+    etransferBolaChallenge:
+      name: Chile
+      code: CL
+    etransferRaceChallenge:
+      name: Laos
+      code: LA
+    sceneNegativeRedeemChallenge:
+      name: Philippines
+      code: PH
+    sceneOverflowChallenge:
+      name: Bulgaria
+      code: BG

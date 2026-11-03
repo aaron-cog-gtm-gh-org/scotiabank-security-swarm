@@ -124,6 +124,9 @@ import { imageCaptchas, verifyImageCaptcha } from './routes/imageCaptcha'
 import { upgradeToDeluxe, deluxeMembershipStatus } from './routes/deluxe'
 import { serveCodeSnippet, checkVulnLines } from './routes/vulnCodeSnippet'
 import { orderHistory, allOrders, toggleDeliveryStatus } from './routes/orderHistory'
+import { getAccounts } from './routes/accounts'
+import { createTransfer, getTransfers } from './routes/transfers'
+import { getScenePlus, redeemScenePlus } from './routes/scenePlus'
 import { continueCode, continueCodeFindIt, continueCodeFixIt } from './routes/continueCode'
 import { ensureFileIsPassed, handleZipFileUpload, checkUploadSize, checkFileType, handleXmlUpload, handleYamlUpload } from './routes/fileUpload'
 
@@ -640,6 +643,11 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   app.post('/rest/user/data-export', security.appendUserId(), utils.asyncHandler(dataExport()))
   app.get('/rest/languages', utils.asyncHandler(getLanguageList()))
   app.get('/rest/order-history', utils.asyncHandler(orderHistory()))
+  app.get('/rest/accounts', security.isAuthorized(), utils.asyncHandler(getAccounts()))
+  app.get('/rest/transfers', security.isAuthorized(), utils.asyncHandler(getTransfers()))
+  app.post('/rest/transfers', security.isAuthorized(), utils.asyncHandler(createTransfer()))
+  app.get('/rest/scene-plus', security.isAuthorized(), utils.asyncHandler(getScenePlus()))
+  app.post('/rest/scene-plus/redeem', security.isAuthorized(), utils.asyncHandler(redeemScenePlus()))
   app.get('/rest/order-history/orders', security.isAccounting(), utils.asyncHandler(allOrders()))
   app.put('/rest/order-history/:id/delivery-status', security.isAccounting(), utils.asyncHandler(toggleDeliveryStatus()))
   app.get('/rest/wallet/balance', security.appendUserId(), utils.asyncHandler(getWalletBalance()))

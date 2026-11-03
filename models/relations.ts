@@ -1,5 +1,6 @@
 import { type Sequelize } from 'sequelize'
 import { AddressModel } from './address'
+import { BankAccountModel } from './bankAccount'
 import { BasketModel } from './basket'
 import { BasketItemModel } from './basketitem'
 import { ChallengeModel } from './challenge'
@@ -16,6 +17,8 @@ import { QuantityModel } from './quantity'
 import { RecycleModel } from './recycle'
 import { SecurityAnswerModel } from './securityAnswer'
 import { SecurityQuestionModel } from './securityQuestion'
+import { ScenePointsModel } from './scenePoints'
+import { TransferModel } from './transfer'
 import { UserModel } from './user'
 
 import { WalletModel } from './wallet'
@@ -29,6 +32,21 @@ const relationsInit = (_sequelize: Sequelize) => {
       name: 'UserId'
     }
   })
+
+  BankAccountModel.belongsTo(UserModel, {
+    constraints: true,
+    foreignKeyConstraint: true,
+    foreignKey: { name: 'UserId' }
+  })
+
+  ScenePointsModel.belongsTo(UserModel, {
+    constraints: true,
+    foreignKeyConstraint: true,
+    foreignKey: { name: 'UserId' }
+  })
+
+  TransferModel.belongsTo(BankAccountModel, { foreignKey: 'fromAccountId', as: 'fromAccount' })
+  TransferModel.belongsTo(BankAccountModel, { foreignKey: 'toAccountId', as: 'toAccount' })
 
   BasketModel.belongsTo(UserModel, {
     constraints: true,

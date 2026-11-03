@@ -4,6 +4,7 @@
  */
 
 import { AddressModelInit } from './address'
+import { BankAccountModelInit } from './bankAccount'
 import { BasketModelInit } from './basket'
 import { BasketItemModelInit } from './basketitem'
 import { CaptchaModelInit } from './captcha'
@@ -23,6 +24,8 @@ import { RecycleModelInit } from './recycle'
 import { relationsInit } from './relations'
 import { SecurityAnswerModelInit } from './securityAnswer'
 import { SecurityQuestionModelInit } from './securityQuestion'
+import { ScenePointsModelInit } from './scenePoints'
+import { TransferModelInit } from './transfer'
 import { UserModelInit } from './user'
 import { WalletModelInit } from './wallet'
 import { Sequelize, Transaction } from 'sequelize'
@@ -45,6 +48,7 @@ function createSequelize (options?: { inMemory?: boolean }) {
 
 function initModels (seq: Sequelize) {
   AddressModelInit(seq)
+  BankAccountModelInit(seq)
   BasketModelInit(seq)
   BasketItemModelInit(seq)
   CaptchaModelInit(seq)
@@ -63,6 +67,8 @@ function initModels (seq: Sequelize) {
   RecycleModelInit(seq)
   SecurityAnswerModelInit(seq)
   SecurityQuestionModelInit(seq)
+  ScenePointsModelInit(seq)
+  TransferModelInit(seq)
   UserModelInit(seq)
   WalletModelInit(seq)
   relationsInit(seq)

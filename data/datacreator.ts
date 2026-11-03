@@ -4,6 +4,7 @@
  */
 
 import { AddressModel } from '../models/address'
+import { BankAccountModel } from '../models/bankAccount'
 import { BasketModel } from '../models/basket'
 import { BasketItemModel } from '../models/basketitem'
 import { CardModel } from '../models/card'
@@ -19,6 +20,7 @@ import { QuantityModel } from '../models/quantity'
 import { RecycleModel } from '../models/recycle'
 import { SecurityAnswerModel } from '../models/securityAnswer'
 import { SecurityQuestionModel } from '../models/securityQuestion'
+import { ScenePointsModel } from '../models/scenePoints'
 import { UserModel } from '../models/user'
 import { WalletModel } from '../models/wallet'
 import { type Product } from './types'
@@ -44,6 +46,8 @@ export default async () => {
   const creators = [
     createSecurityQuestions,
     createUsers,
+    createBankAccounts,
+    createScenePoints,
     createChallenges,
     createRandomFakeUsers,
     createProducts,
@@ -211,6 +215,40 @@ async function createUsers () {
       }
     })
   )
+}
+
+async function createBankAccounts () {
+  let accountNumber = 0
+  for (const [key, user] of Object.entries(datacache.users)) {
+    const chequingBalance = key === 'admin' ? 250000 : key === 'bjoernGoogle' ? 125000 : key === 'jim' ? 4200 : 1800
+    const balances = {
+      CHEQUING: chequingBalance,
+      SAVINGS: Math.round(chequingBalance * 0.35),
+      TFSA: Math.round(chequingBalance * 1.8),
+      RRSP: Math.round(chequingBalance * 3.2)
+    } as const
+    const accountTypes = [
+      ['CHEQUING', 'Everyday Chequing'],
+      ['SAVINGS', 'High Interest Savings (HISA)'],
+      ['TFSA', 'Tax-Free Savings Account'],
+      ['RRSP', 'Registered Retirement Savings Plan']
+    ] as const
+
+    for (const [type, nickname] of accountTypes) {
+      accountNumber++
+      await BankAccountModel.create({
+        UserId: user.id,
+        type,
+        nickname,
+        accountNumber: `40121-0${String(accountNumber).padStart(4, '0')}`,
+        balance: balances[type]
+      })
+    }
+  }
+}
+
+async function createScenePoints () {
+  return await Promise.all(Object.values(datacache.users).map(async user => await ScenePointsModel.create({ UserId: user.id, points: 5000 })))
 }
 
 async function createWallet () {

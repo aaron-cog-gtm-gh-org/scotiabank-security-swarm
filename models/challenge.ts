@@ -128,7 +128,11 @@ export const CHALLENGE_KEYS = [
   'aiDebuggingChallenge',
   'systemPromptExtractionChallenge',
   'iacLeakedKeyChallenge',
-  'vulnerableDockerImageChallenge'
+  'vulnerableDockerImageChallenge',
+  'etransferBolaChallenge',
+  'etransferRaceChallenge',
+  'sceneNegativeRedeemChallenge',
+  'sceneOverflowChallenge'
 ] as const
 
 export type ChallengeKey = typeof CHALLENGE_KEYS[number]
