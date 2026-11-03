@@ -16,6 +16,17 @@
   </button>
   <h3 mat-subheader class="side-subHeader show-lt-md-only" translate>ACCOUNT</h3>
 
+  @if (isLoggedIn()) {
+    <a mat-list-item routerLink="/accounts" (click)="onToggleSidenav();" aria-label="Go to bank accounts">
+      <mat-icon>account_balance</mat-icon>
+      <span class="menu-text truncate">Bank Accounts</span>
+    </a>
+    <a mat-list-item routerLink="/scene-plus" (click)="onToggleSidenav();" aria-label="Go to Scene Plus">
+      <mat-icon>stars</mat-icon>
+      <span class="menu-text truncate">Scene+</span>
+    </a>
+  }
+
   <div class="show-lt-md-only">
     @if (!isLoggedIn()) {
       <a mat-list-item routerLink="/login" (click)="onToggleSidenav();"

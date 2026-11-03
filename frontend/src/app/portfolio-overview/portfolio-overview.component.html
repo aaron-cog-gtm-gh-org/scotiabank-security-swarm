@@ -10,11 +10,11 @@
   <span>Balances {{ asOf }}</span>
 </p>
 
-<section class="overview" aria-label="Portfolio overview with mock balances">
+<section class="overview" aria-label="Portfolio overview">
   <div class="headline">
     <div class="balance-primary">
       <span class="label">Combined Balance</span>
-      <span class="amount">{{ combinedBalance | number: '1.2-2' }}</span>
+      <span class="amount">${{ combinedBalance | number: '1.2-2' }}</span>
       <span class="sub">
         Cash Balance: {{ buyingPower | number: '1.2-2' }}
       </span>

@@ -1,0 +1,33 @@
+<!--
+  ~ Copyright (c) 2014-2026 Bjoern Kimminich & the OWASP Juice Shop contributors.
+  ~ SPDX-License-Identifier: MIT
+-->
+
+<main class="scene-page">
+  <header class="scene-header">
+    <div class="scene-mark" aria-label="Scene Plus"><span></span><span></span><span></span><b>SCENE+</b></div>
+    <p>More rewards. More moments. More of what you love.</p>
+    <div class="points-card"><span>Your Scene+ points</span><strong>{{ points | number: '1.0-0' }}</strong></div>
+  </header>
+  @if (errorMessage) { <p class="error-message" role="alert">{{ errorMessage }}</p> }
+  @if (resultMessage) { <p class="result-message" role="status">{{ resultMessage }}</p> }
+  <section class="rewards" aria-labelledby="rewards-title">
+    <p class="eyebrow">REDEEM YOUR POINTS</p>
+    <h1 id="rewards-title">Choose your reward</h1>
+    <div class="reward-grid">
+      @for (reward of rewards; track reward.id) {
+        <mat-card class="reward-card">
+          <div class="reward-icon"><mat-icon>{{ reward.id === 1 ? 'credit_score' : reward.id === 4 ? 'flight' : 'card_giftcard' }}</mat-icon></div>
+          <h2>{{ reward.name }}</h2>
+          <p class="cost">{{ reward.points | number: '1.0-0' }} points</p>
+          @if (reward.value > 0) { <p class="value">A ${{ reward.value | number: '1.0-0' }} CAD statement credit</p> }
+          <form ngNativeValidate (ngSubmit)="redeem(reward)">
+            <label [for]="'quantity-' + reward.id">Quantity</label>
+            <input [id]="'quantity-' + reward.id" [name]="'quantity-' + reward.id" type="number" min="1" step="1" required [(ngModel)]="quantities[reward.id]">
+            <button mat-flat-button type="submit" [disabled]="redeeming === reward.id">{{ redeeming === reward.id ? 'Redeeming...' : 'Redeem' }}</button>
+          </form>
+        </mat-card>
+      }
+    </div>
+  </section>
+</main>

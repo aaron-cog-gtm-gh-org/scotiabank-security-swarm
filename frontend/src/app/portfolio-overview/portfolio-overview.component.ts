@@ -3,8 +3,9 @@
  * SPDX-License-Identifier: MIT
  */
 
-import { Component, ChangeDetectionStrategy } from '@angular/core'
+import { Component, ChangeDetectionStrategy, type OnInit, inject } from '@angular/core'
 import { DecimalPipe } from '@angular/common'
+import { InvestmentService } from '../Services/investment.service'
 
 interface AssetSlice {
   label: string
@@ -30,22 +31,38 @@ const ALLOCATION: Omit<AssetSlice, 'dashArray' | 'dashOffset'>[] = [
   styleUrls: ['./portfolio-overview.component.scss'],
   imports: [DecimalPipe]
 })
-export class PortfolioOverviewComponent {
-  readonly combinedBalance = 487_312.58
-  readonly bookCost = 421_904.12
-  readonly dayChange = 1842.37
-  readonly dayChangePercentage = 0.38
-  readonly buyingPower = 24_186.9
-  readonly asOf = 'as of 4:00 PM ET'
+export class PortfolioOverviewComponent implements OnInit {
+  private readonly investmentService = inject(InvestmentService)
+  combinedBalance = 487_312.58
+  bookCost = 421_904.12
+  dayChange = 1842.37
+  dayChangePercentage = 0.38
+  buyingPower = 24_186.9
+  asOf = 'as of 4:00 PM ET'
 
   readonly assetMix: AssetSlice[] = this.buildAssetMix()
+
+  ngOnInit (): void {
+    if (!localStorage.getItem('token')) return
+    this.investmentService.getAccounts().subscribe({
+      next: (accounts) => {
+        this.combinedBalance = accounts.reduce((total, account) => total + Number(account.balance), 0)
+        this.bookCost = this.combinedBalance
+        this.buyingPower = accounts.filter(account => account.type === 'CHEQUING' || account.type === 'SAVINGS').reduce((total, account) => total + Number(account.balance), 0)
+        this.dayChange = 0
+        this.dayChangePercentage = 0
+        this.asOf = 'updated just now'
+      },
+      error: () => { this.asOf = 'unavailable' }
+    })
+  }
 
   get unrealizedGain (): number {
     return this.combinedBalance - this.bookCost
   }
 
   get unrealizedGainPercentage (): number {
-    return (this.unrealizedGain / this.bookCost) * 100
+    return this.bookCost === 0 ? 0 : (this.unrealizedGain / this.bookCost) * 100
   }
 
   private buildAssetMix (): AssetSlice[] {

@@ -1,0 +1,109 @@
+<!--
+  ~ Copyright (c) 2014-2026 Bjoern Kimminich & the OWASP Juice Shop contributors.
+  ~ SPDX-License-Identifier: MIT
+-->
+
+<main class="accounts-page">
+  <header class="accounts-hero">
+    <p class="eyebrow">BANK ACCOUNTS</p>
+    <h1>Make your money work for you</h1>
+    <p>Manage your Scotia accounts and send money securely with Interac e-Transfer.</p>
+  </header>
+
+  @if (errorMessage) {
+    <p class="error-message" role="alert">{{ errorMessage }}</p>
+  }
+
+  <section class="account-summary" aria-labelledby="accounts-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">YOUR SCOTIA ACCOUNTS</p>
+        <h2 id="accounts-title">Accounts</h2>
+      </div>
+      <div class="total"><span>Total balance</span><strong>${{ totalBalance | number: '1.2-2' }} CAD</strong></div>
+    </div>
+    @if (loading) {
+      <p>Loading your accounts...</p>
+    } @else {
+      <div class="account-grid">
+        @for (account of accounts; track account.id) {
+          <mat-card class="account-card">
+            <p class="account-type">{{ account.type }}</p>
+            <h3>{{ account.nickname }}</h3>
+            <p class="account-number">{{ maskedAccountNumber(account.accountNumber) }}</p>
+            <p class="account-balance">${{ account.balance | number: '1.2-2' }} <span>CAD</span></p>
+          </mat-card>
+        }
+      </div>
+    }
+  </section>
+
+  <section class="transfer-section" aria-labelledby="transfer-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">INTERAC E-TRANSFER</p>
+        <h2 id="transfer-title">Send money</h2>
+      </div>
+      <mat-icon>swap_horiz</mat-icon>
+    </div>
+    <form [formGroup]="transferForm" (ngSubmit)="submitTransfer()" class="transfer-form">
+      <mat-form-field appearance="outline">
+        <mat-label>From account</mat-label>
+        <mat-select formControlName="fromAccountId">
+          @for (account of accounts; track account.id) {
+            <mat-option [value]="account.id">{{ account.nickname }} · ${{ account.balance | number: '1.2-2' }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <div class="destination-toggle" role="group" aria-label="Transfer destination">
+        <button type="button" [class.active]="destinationMode === 'email'" (click)="setDestinationMode('email')">Send to email</button>
+        <button type="button" [class.active]="destinationMode === 'internal'" (click)="setDestinationMode('internal')">Move between my accounts</button>
+      </div>
+
+      @if (destinationMode === 'email') {
+        <mat-form-field appearance="outline">
+          <mat-label>Recipient email</mat-label>
+          <input matInput type="email" formControlName="recipientEmail" placeholder="name@example.com">
+        </mat-form-field>
+      } @else {
+        <mat-form-field appearance="outline">
+          <mat-label>To account</mat-label>
+          <mat-select formControlName="toAccountId">
+            @for (account of accounts; track account.id) {
+              <mat-option [value]="account.id">{{ account.nickname }} · {{ maskedAccountNumber(account.accountNumber) }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      }
+
+      <mat-form-field appearance="outline">
+        <mat-label>Amount (CAD)</mat-label>
+        <input matInput type="number" min="0.01" step="0.01" formControlName="amount">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Memo (optional)</mat-label>
+        <input matInput formControlName="memo">
+      </mat-form-field>
+      <button mat-flat-button class="send-button" type="submit" [disabled]="submitting">{{ submitting ? 'Sending...' : 'Send' }}</button>
+    </form>
+  </section>
+
+  <section class="history-section" aria-labelledby="history-title">
+    <p class="eyebrow">ACTIVITY</p>
+    <h2 id="history-title">Transfer history</h2>
+    @if (transfers.length === 0) {
+      <p class="empty">Your transfer history will appear here.</p>
+    } @else {
+      <div class="history-list">
+        @for (transfer of transfers; track transfer.id) {
+          <article class="history-row">
+            <span class="history-icon"><mat-icon>swap_horiz</mat-icon></span>
+            <span class="history-details"><strong>{{ transfer.memo || 'e-Transfer' }}</strong><small>{{ transfer.createdAt | date: 'MMM d, y, h:mm a' }}</small></span>
+            <strong class="history-amount">-${{ transfer.amount | number: '1.2-2' }}</strong>
+          </article>
+        }
+      </div>
+    }
+  </section>
+</main>

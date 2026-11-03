@@ -12,11 +12,14 @@ import { ContactComponent } from './contact/contact.component'
 import { RegisterComponent } from './register/register.component'
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component'
 import { SearchResultComponent } from './search-result/search-result.component'
+import { AccountsComponent } from './accounts/accounts.component'
+import { ScenePlusComponent } from './scene-plus/scene-plus.component'
+import { inject } from '@angular/core'
 import { LoginComponent } from './login/login.component'
 import { AdministrationComponent } from './administration/administration.component'
 import { ChangePasswordComponent } from './change-password/change-password.component'
 import { ComplaintComponent } from './complaint/complaint.component'
-import { RouterModule, type Routes, type UrlMatchResult, type UrlSegment } from '@angular/router'
+import { Router, RouterModule, type CanActivateFn, type Routes, type UrlMatchResult, type UrlSegment } from '@angular/router'
 import { TwoFactorAuthEnterComponent } from './two-factor-auth-enter/two-factor-auth-enter.component'
 import { ErrorPageComponent } from './error-page/error-page.component'
 import { PrivacySecurityComponent } from './privacy-security/privacy-security.component'
@@ -71,6 +74,10 @@ const loadRecycleComponent = async () => {
 const loadAboutComponent = async () => {
   const module = await import('./about/about.component')
   return module.AboutComponent
+}
+
+const bankingLoginGuard: CanActivateFn = (_route, state) => {
+  return localStorage.getItem('token') ? true : inject(Router).createUrlTree(['/login'], { queryParams: { redirectUrl: state.url } })
 }
 
 // vuln-code-snippet start adminSectionChallenge scoreBoardChallenge web3SandboxChallenge
@@ -275,6 +282,13 @@ const routes: Routes = [
   }
 ]
 // vuln-code-snippet end adminSectionChallenge scoreBoardChallenge web3SandboxChallenge
+
+// vuln-code-snippet hide-start
+routes.unshift(
+  { path: 'accounts', component: AccountsComponent, canActivate: [bankingLoginGuard] },
+  { path: 'scene-plus', component: ScenePlusComponent, canActivate: [bankingLoginGuard] }
+)
+// vuln-code-snippet hide-end
 
 export const Routing = RouterModule.forRoot(routes, { useHash: true })
 

@@ -5,19 +5,34 @@
 
 import { type ComponentFixture, TestBed } from '@angular/core/testing'
 import { PortfolioOverviewComponent } from './portfolio-overview.component'
+import { InvestmentService } from '../Services/investment.service'
+import { of } from 'rxjs'
 
 describe('PortfolioOverviewComponent', () => {
   let component: PortfolioOverviewComponent
   let fixture: ComponentFixture<PortfolioOverviewComponent>
 
   beforeEach(async () => {
+    localStorage.removeItem('token')
     await TestBed.configureTestingModule({
-      imports: [PortfolioOverviewComponent]
+      imports: [PortfolioOverviewComponent],
+      providers: [{ provide: InvestmentService, useValue: { getAccounts: vi.fn().mockReturnValue(of([])) } }]
     }).compileComponents()
 
     fixture = TestBed.createComponent(PortfolioOverviewComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
+  })
+
+  afterEach(() => localStorage.removeItem('token'))
+
+  it('should total live account balances when logged in', () => {
+    localStorage.setItem('token', 'token')
+    const service = TestBed.inject(InvestmentService)
+    vi.mocked(service.getAccounts).mockReturnValue(of([{ id: 5, UserId: 2, type: 'CHEQUING', nickname: 'Chequing', accountNumber: '40121-00005', balance: 4200 }]))
+    component.ngOnInit()
+    expect(component.combinedBalance).toBe(4200)
+    expect(component.buyingPower).toBe(4200)
   })
 
   it('should create', () => {

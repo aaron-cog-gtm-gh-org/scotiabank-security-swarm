@@ -1,0 +1,208 @@
+/*!
+ * Copyright (c) 2014-2026 Bjoern Kimminich & the OWASP Juice Shop contributors.
+ * SPDX-License-Identifier: MIT
+ */
+
+@use '../../styles/variables' as *;
+
+.scene-page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: $space-l $space-xl $space-4xl;
+  color: #333;
+}
+
+.scene-header {
+  position: relative;
+  margin: 0 (-$space-xl) $space-2xl;
+  padding: $space-xl $space-xl $space-2xl;
+  background: linear-gradient(120deg, #24112f, #4d1b66);
+  color: #fff;
+}
+
+.scene-mark {
+  display: flex;
+  align-items: center;
+  gap: $space-xs;
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.scene-mark span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.scene-mark span:nth-child(2) {
+  background: #ef4b81;
+}
+
+.scene-mark span:nth-child(3) {
+  background: #f7c443;
+}
+
+.scene-header > p {
+  margin: $space-s 0 0;
+  font-size: 17px;
+}
+
+.points-card {
+  position: absolute;
+  right: 32px;
+  bottom: -32px;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2xs;
+  min-width: 190px;
+  padding: $space-m $space-ml;
+  border-radius: 4px;
+  background: #fff;
+  color: #333;
+  box-shadow: 0 4px 14px #0003;
+}
+
+.points-card span {
+  color: #595959;
+  font-size: 13px;
+}
+
+.points-card strong {
+  color: #4d1b66;
+  font-size: 28px;
+}
+
+.eyebrow {
+  margin: 0 0 $space-xs;
+  color: #ec111a;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+h1 {
+  margin: 0 0 $space-ml;
+  font-size: 34px;
+  letter-spacing: -0.7px;
+}
+
+.reward-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-m;
+}
+
+.reward-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 310px;
+  padding: $space-ml;
+  border: 1px solid #e2e2e2;
+  border-radius: 4px;
+  box-shadow: none;
+}
+
+.reward-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: $space-m;
+  border-radius: 50%;
+  background: #f5f6fa;
+  color: #4d1b66;
+}
+
+.reward-card h2 {
+  min-height: 52px;
+  margin: 0 0 $space-xs;
+  font-size: 19px;
+}
+
+.cost {
+  margin: 0;
+  color: #4d1b66;
+  font-weight: 800;
+}
+
+.value {
+  min-height: 20px;
+  margin: $space-xs 0 $space-m;
+  color: #595959;
+  font-size: 13px;
+}
+
+.reward-card form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+  margin-top: auto;
+}
+
+.reward-card label {
+  color: #595959;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.reward-card input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: $space-s;
+  border: 1px solid #aaa;
+  border-radius: 2px;
+  font: inherit;
+}
+
+.reward-card button {
+  margin-top: $space-2xs;
+  border-radius: 999px;
+  background: #ec111a !important;
+  color: #fff !important;
+  font-weight: 700;
+}
+
+.error-message,
+.result-message {
+  margin: 0 0 $space-m;
+  padding: $space-s $space-m;
+}
+
+.error-message {
+  border-left: 4px solid #ec111a;
+  background: #fff0f0;
+  color: #8f1720;
+}
+
+.result-message {
+  border-left: 4px solid #138636;
+  background: #eef8f1;
+  color: #145c2c;
+}
+
+@media (max-width: 900px) {
+  .reward-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .scene-page {
+    padding: $space-m $space-m $space-3xl;
+  }
+
+  .scene-header {
+    margin: 0 (-$space-m) $space-2xl;
+    padding: $space-l $space-m $space-2xl;
+  }
+
+  .points-card {
+    right: 16px;
+  }
+
+  .reward-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,256 @@
+/*!
+ * Copyright (c) 2014-2026 Bjoern Kimminich & the OWASP Juice Shop contributors.
+ * SPDX-License-Identifier: MIT
+ */
+
+@use '../../styles/variables' as *;
+
+.accounts-page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: $space-l $space-xl $space-4xl;
+  color: var(--scotia-ink, #333);
+}
+
+.accounts-hero {
+  margin: 0 (-$space-xl) $space-xl;
+  padding: $space-3xl $space-xl;
+  background: #3b0a0a;
+  color: #fff;
+}
+
+.accounts-hero h1 {
+  max-width: 620px;
+  margin: $space-2xs 0 $space-s;
+  font-size: clamp(32px, 4vw, 54px);
+  letter-spacing: -1.5px;
+}
+
+.accounts-hero p:last-child {
+  max-width: 540px;
+  margin: 0;
+  font-size: 17px;
+}
+
+.eyebrow {
+  margin: 0 0 $space-xs;
+  color: var(--scotia-red, #ec111a);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+.accounts-hero .eyebrow {
+  color: #fff;
+}
+
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: $space-l;
+  margin-bottom: $space-m;
+}
+
+h2 {
+  margin: 0;
+  font-size: 30px;
+  letter-spacing: -0.5px;
+}
+
+.total {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: $space-2xs;
+  color: #595959;
+}
+
+.total strong {
+  color: #333;
+  font-size: 22px;
+}
+
+.account-summary,
+.transfer-section,
+.history-section {
+  margin-bottom: $space-xl;
+}
+
+.account-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-m;
+}
+
+.account-card {
+  min-height: 172px;
+  padding: $space-ml;
+  border: 1px solid #e2e2e2;
+  border-radius: 4px;
+  box-shadow: none;
+}
+
+.account-type {
+  margin: 0;
+  color: #595959;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.account-card h3 {
+  margin: $space-xs 0 $space-3xs;
+  font-size: 18px;
+}
+
+.account-number {
+  margin: 0 0 $space-l;
+  color: #595959;
+  font-size: 13px;
+}
+
+.account-balance {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.account-balance span {
+  color: #595959;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.transfer-section {
+  padding: $space-l;
+  border: 1px solid #e2e2e2;
+  background: #fff;
+}
+
+.transfer-section .section-heading mat-icon {
+  color: #ec111a;
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+}
+
+.transfer-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-s $space-m;
+  align-items: start;
+}
+
+.destination-toggle {
+  display: flex;
+  gap: $space-xs;
+  grid-column: 1 / -1;
+  margin-bottom: $space-2xs;
+}
+
+.destination-toggle button {
+  padding: $space-xs $space-m;
+  border: 1px solid #333;
+  border-radius: 999px;
+  background: #fff;
+  color: #333;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.destination-toggle button.active {
+  border-color: #ec111a;
+  background: #ec111a;
+  color: #fff;
+}
+
+.send-button {
+  grid-column: 1 / -1;
+  justify-self: start;
+  border-radius: 999px;
+  background: #ec111a !important;
+  color: #fff !important;
+  font-weight: 700;
+}
+
+.error-message {
+  margin: 0 0 $space-m;
+  padding: $space-s $space-m;
+  border-left: 4px solid #ec111a;
+  background: #fff0f0;
+  color: #8f1720;
+}
+
+.history-list {
+  border-top: 1px solid #e2e2e2;
+}
+
+.history-row {
+  display: flex;
+  align-items: center;
+  gap: $space-m;
+  padding: $space-m $space-2xs;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.history-icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #f5f6fa;
+  color: #ec111a;
+}
+
+.history-details {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: $space-2xs;
+}
+
+.history-details small,
+.empty {
+  color: #595959;
+}
+
+.history-amount {
+  color: #333;
+}
+
+@media (max-width: 800px) {
+  .accounts-page {
+    padding: $space-m $space-m $space-3xl;
+  }
+
+  .accounts-hero {
+    margin: 0 (-$space-m) $space-l;
+    padding: $space-xl $space-m;
+  }
+
+  .account-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .total {
+    align-items: flex-start;
+  }
+
+  .account-grid,
+  .transfer-form {
+    grid-template-columns: 1fr;
+  }
+
+  .destination-toggle {
+    flex-direction: column;
+  }
+}

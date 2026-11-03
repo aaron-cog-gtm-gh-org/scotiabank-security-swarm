@@ -41,7 +41,7 @@ export function redeemScenePlus () {
       return
     }
 
-    // The points ledger uses signed 32-bit integer arithmetic.
+    // The ledger stores points as signed INT32 values.
     const cost = Math.imul(reward.points, quantity)
     if (Number(points.points) < cost) {
       res.status(402).json({ status: 'error', message: 'Not enough Scene+ points.' })

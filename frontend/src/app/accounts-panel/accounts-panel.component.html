@@ -3,7 +3,7 @@
   ~ SPDX-License-Identifier: MIT
 -->
 
-<aside class="accounts" aria-label="My accounts with mock balances">
+<aside class="accounts" aria-label="My accounts">
   <h2>My Accounts</h2>
 
   <div class="column-heads">
@@ -13,7 +13,7 @@
     </span>
     <span class="right">
       Balance
-      <span class="secondary">Unrealized gain/loss</span>
+      <span class="secondary">{{ liveAccounts ? 'CAD' : 'Unrealized gain/loss' }}</span>
     </span>
   </div>
 
@@ -21,14 +21,16 @@
     @for (account of accounts; track account.number) {
       <li class="account">
         <span class="account-name">
-          <a routerLink="/order-history">{{ account.name }}</a>
+          <a routerLink="/accounts">{{ account.name }}</a>
           <span class="account-number">{{ account.number }}</span>
         </span>
         <span class="account-figures">
-          <span class="account-balance">{{ account.balance | number: '1.2-2' }}</span>
-          <span class="account-change" [class.up]="account.change >= 0" [class.down]="account.change < 0">
-            {{ account.change >= 0 ? '+' : '' }}{{ account.change | number: '1.2-2' }}%
-          </span>
+          <span class="account-balance">${{ account.balance | number: '1.2-2' }}</span>
+          @if (account.change !== undefined) {
+            <span class="account-change" [class.up]="account.change >= 0" [class.down]="account.change < 0">
+              {{ account.change >= 0 ? '+' : '' }}{{ account.change | number: '1.2-2' }}%
+            </span>
+          }
         </span>
       </li>
     }
@@ -36,7 +38,7 @@
 
   <div class="accounts-total">
     <span>Total balance</span>
-    <span class="total-value">{{ totalBalance | number: '1.2-2' }}</span>
+    <span class="total-value">${{ totalBalance | number: '1.2-2' }} CAD</span>
   </div>
 
   <div class="accounts-actions">
@@ -54,5 +56,6 @@
     </a>
   </div>
 
-  <p class="disclaimer">Mock balances for demonstration. Not affiliated with The Bank of Nova Scotia.</p>
+  @if (errorMessage) { <p role="alert">{{ errorMessage }}</p> }
+  <p class="disclaimer">{{ liveAccounts ? 'Demo account balances.' : 'Mock balances for demonstration.' }} Not affiliated with The Bank of Nova Scotia.</p>
 </aside>

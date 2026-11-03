@@ -68,19 +68,15 @@ export function createTransfer () {
       return
     }
 
-    const balanceReadEarlier = Number(fromAccount.balance)
-    if (balanceReadEarlier < transferAmount) {
+    const availableBalance = Number(fromAccount.balance)
+    if (availableBalance < transferAmount) {
       res.status(402).json({ status: 'error', message: 'Insufficient funds.' })
       return
     }
 
-    // The account owner check is intentionally absent: this is the BOLA exercise.
     challengeUtils.solveIf(challenges.etransferBolaChallenge, () => fromAccount.UserId !== user?.data.id)
     await screenTransfer()
 
-    // The screening delay separates the balance check from the debit. Without a
-    // transaction or row lock, concurrent requests can overdraw this account.
-    fromAccount.balance = balanceReadEarlier - transferAmount
     await BankAccountModel.decrement({ balance: transferAmount }, { where: { id: fromAccount.id } })
     if (destinationAccount != null) {
       await BankAccountModel.increment({ balance: transferAmount }, { where: { id: destinationAccount.id } })
