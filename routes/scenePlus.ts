@@ -6,8 +6,7 @@
 import { type Request, type Response } from 'express'
 import { BankAccountModel } from '../models/bankAccount'
 import { ScenePointsModel } from '../models/scenePoints'
-import * as challengeUtils from '../lib/challengeUtils'
-import { challenges } from '../data/datacache'
+import * as models from '../models/index'
 import * as security from '../lib/insecurity'
 
 export const rewards = [
@@ -25,40 +24,66 @@ export function getScenePlus () {
   }
 }
 
+const MAX_REDEMPTION_QUANTITY = 100
+
+type RedemptionResult =
+  | { status: 200, data: { points: number, reward: typeof rewards[number], quantity: number, cost: number, chequingBalance: number | null } }
+  | { status: 402 | 404, message: string }
+
+// Sequelize shares one SQLite connection, so overlapping transactions would interleave.
+let redemptionQueue: Promise<unknown> = Promise.resolve()
+async function serializeRedemption<T> (task: () => Promise<T>): Promise<T> {
+  const run = redemptionQueue.then(task, task)
+  redemptionQueue = run.catch(() => undefined)
+  return await run
+}
+
 export function redeemScenePlus () {
   return async (req: Request, res: Response) => {
     const user = security.authenticatedUsers.from(req)
     const reward = rewards.find(candidate => candidate.id === Number(req.body.rewardId))
     const quantity = Number(req.body.quantity)
-    if (reward == null || !Number.isInteger(quantity) || !Number.isFinite(quantity)) {
+    if (reward == null || !Number.isSafeInteger(quantity) || quantity < 1 || quantity > MAX_REDEMPTION_QUANTITY) {
       res.status(400).json({ status: 'error', message: 'Invalid reward or quantity.' })
       return
     }
 
-    const points = await ScenePointsModel.findOne({ where: { UserId: user?.data.id } })
-    if (points == null) {
-      res.status(404).json({ status: 'error', message: 'Scene+ account not found.' })
+    const cost = reward.points * quantity
+    const credit = reward.value * quantity
+    if (!Number.isSafeInteger(cost) || !Number.isSafeInteger(credit)) {
+      res.status(400).json({ status: 'error', message: 'Invalid reward or quantity.' })
       return
     }
 
-    // The ledger stores points as signed INT32 values.
-    const cost = Math.imul(reward.points, quantity)
-    if (Number(points.points) < cost) {
-      res.status(402).json({ status: 'error', message: 'Not enough Scene+ points.' })
-      return
-    }
+    const result = await serializeRedemption(async () => await models.sequelize.transaction(async (transaction): Promise<RedemptionResult> => {
+      const points = await ScenePointsModel.findOne({ where: { UserId: user?.data.id }, transaction })
+      if (points == null) {
+        return { status: 404, message: 'Scene+ account not found.' }
+      }
+      if (Number(points.points) < cost) {
+        return { status: 402, message: 'Not enough Scene+ points.' }
+      }
 
-    challengeUtils.solveIf(challenges.sceneNegativeRedeemChallenge, () => quantity < 0)
-    challengeUtils.solveIf(challenges.sceneOverflowChallenge, () => quantity > 0 && cost < 0)
-    points.points = (Number(points.points) - cost) | 0
-    await points.save()
+      let chequingBalance: number | null = null
+      if (credit !== 0) {
+        const account = await BankAccountModel.findOne({ where: { UserId: user?.data.id, type: 'CHEQUING' }, transaction })
+        if (account == null) {
+          return { status: 404, message: 'Chequing account not found.' }
+        }
+        await account.increment({ balance: credit }, { transaction })
+        await account.reload({ transaction })
+        chequingBalance = account.balance
+      }
 
-    let chequingBalance: number | null = null
-    if (reward.value !== 0) {
-      await BankAccountModel.increment({ balance: reward.value * quantity }, { where: { UserId: user?.data.id, type: 'CHEQUING' } })
-      const account = await BankAccountModel.findOne({ where: { UserId: user?.data.id, type: 'CHEQUING' } })
-      chequingBalance = account?.balance ?? null
+      points.points = Number(points.points) - cost
+      await points.save({ transaction })
+      return { status: 200, data: { points: points.points, reward, quantity, cost, chequingBalance } }
+    }))
+
+    if (result.status === 200) {
+      res.status(200).json({ status: 'success', data: result.data })
+    } else {
+      res.status(result.status).json({ status: 'error', message: result.message })
     }
-    res.status(200).json({ status: 'success', data: { points: points.points, reward, quantity, cost, chequingBalance } })
   }
 }

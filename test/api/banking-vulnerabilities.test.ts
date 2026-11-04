@@ -68,29 +68,62 @@ void describe('/rest/transfers', () => {
   })
 })
 
+async function sceneBalances (token: string) {
+  const points = (await request(app).get('/rest/scene-plus').set(auth(token))).body.data.points
+  const accounts = (await request(app).get('/rest/accounts').set(auth(token))).body.data
+  const chequing = accounts.find((account: { type: string }) => account.type === 'CHEQUING').balance
+  return { points, chequing }
+}
+
 void describe('/rest/scene-plus/redeem', () => {
-  void it('mints points with a negative quantity', async () => {
-    const before = (await request(app).get('/rest/scene-plus').set(auth(jimToken))).body.data.points
+  for (const quantity of [-1, 0, 1.5, 101, 2147484, 4294966, '-1', null]) {
+    void it(`rejects quantity ${JSON.stringify(quantity)} without changing balances`, async () => {
+      const before = await sceneBalances(jimToken)
+      const response = await request(app)
+        .post('/rest/scene-plus/redeem')
+        .set(auth(jimToken))
+        .send({ rewardId: 1, quantity })
+
+      assert.equal(response.status, 400)
+      assert.deepEqual(await sceneBalances(jimToken), before)
+    })
+  }
+
+  void it('rejects a redemption that costs more than the available points', async () => {
+    const before = await sceneBalances(jimToken)
     const response = await request(app)
       .post('/rest/scene-plus/redeem')
       .set(auth(jimToken))
-      .send({ rewardId: 1, quantity: -1 })
+      .send({ rewardId: 4, quantity: 100 })
 
-    assert.equal(response.status, 200)
-    assert.ok(response.body.data.points > before)
-    assert.equal(await challengeSolved('sceneNegativeRedeemChallenge'), true)
+    assert.equal(response.status, 402)
+    assert.deepEqual(await sceneBalances(jimToken), before)
   })
 
-  void it('wraps a large positive quantity into a negative cost', async () => {
-    const before = (await request(app).get('/rest/scene-plus').set(auth(jimToken))).body.data.points
+  void it('debits points and credits chequing for a valid redemption', async () => {
+    const before = await sceneBalances(jimToken)
     const response = await request(app)
       .post('/rest/scene-plus/redeem')
       .set(auth(jimToken))
-      .send({ rewardId: 1, quantity: 4294966 })
+      .send({ rewardId: 1, quantity: 2 })
 
     assert.equal(response.status, 200)
-    assert.ok(response.body.data.cost < 0)
-    assert.ok(response.body.data.points > before)
-    assert.equal(await challengeSolved('sceneOverflowChallenge'), true)
+    assert.equal(response.body.data.cost, 2000)
+    const after = await sceneBalances(jimToken)
+    assert.equal(after.points, before.points - 2000)
+    assert.equal(after.chequing, before.chequing + 20)
+  })
+
+  void it('does not overspend points under parallel redemptions', async () => {
+    const before = await sceneBalances(jimToken)
+    const affordable = Math.floor(before.points / 2500)
+    const responses = await Promise.all(new Array(affordable + 3).fill(null).map(async () => await request(app)
+      .post('/rest/scene-plus/redeem')
+      .set(auth(jimToken))
+      .send({ rewardId: 3, quantity: 1 })))
+
+    assert.equal(responses.filter(response => response.status === 200).length, affordable)
+    const after = await sceneBalances(jimToken)
+    assert.equal(after.points, before.points - affordable * 2500)
   })
 })
