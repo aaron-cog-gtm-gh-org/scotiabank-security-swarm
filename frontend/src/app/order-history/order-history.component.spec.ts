@@ -47,7 +47,8 @@ describe('AccountingComponent', () => {
         }
         productService.get.mockReturnValue(of({}))
         orderHistoryService = {
-            get: vi.fn().mockName("OrderHistoryService.get")
+            get: vi.fn().mockName("OrderHistoryService.get"),
+            getConfirmationPdf: vi.fn().mockName("OrderHistoryService.getConfirmationPdf")
         }
         orderHistoryService.get.mockReturnValue(of([]))
         basketService = { hostServer: 'http://host.example' }
@@ -157,11 +158,17 @@ describe('AccountingComponent', () => {
         expect(passed.deluxePrice).toBe(15)
     })
 
-    it('should open the order confirmation PDF in a new tab using the basket host server', () => {
+    it('should fetch the order confirmation PDF through the authenticated order history API and open it in a new tab', () => {
+        const pdf = new Blob(['%PDF'], { type: 'application/pdf' })
+        orderHistoryService.getConfirmationPdf.mockReturnValue(of(pdf))
+        const createObjectURLSpy = vi.spyOn(URL, 'createObjectURL').mockReturnValue('blob:http://host.example/abc')
         const openSpy = vi.spyOn(window, 'open').mockImplementation(() => null)
         component.openConfirmationPDF('abc123')
-        expect(openSpy).toHaveBeenCalledWith('http://host.example/ftp/order_abc123.pdf', '_blank')
+        expect(orderHistoryService.getConfirmationPdf).toHaveBeenCalledWith('abc123')
+        expect(createObjectURLSpy).toHaveBeenCalledWith(pdf)
+        expect(openSpy).toHaveBeenCalledWith('blob:http://host.example/abc', '_blank')
         openSpy.mockRestore()
+        createObjectURLSpy.mockRestore()
     })
 
     it('should navigate to /track-result with the order id as a query parameter when tracking an order', async () => {

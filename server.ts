@@ -92,7 +92,7 @@ import { getUserProfile } from './routes/userProfile'
 import { serveAngularClient } from './routes/angular'
 import { resetPassword } from './routes/resetPassword'
 import { serveLogFiles } from './routes/logfileServer'
-import { servePublicFiles } from './routes/fileServer'
+import { servePublicFiles, isPublicFtpFile } from './routes/fileServer'
 import { addMemory, getMemories } from './routes/memory'
 import { changePassword } from './routes/changePassword'
 import { countryMapping } from './routes/countryMapping'
@@ -123,7 +123,7 @@ import { serveCodeFixes, checkCorrectFix } from './routes/vulnCodeFixes'
 import { imageCaptchas, verifyImageCaptcha } from './routes/imageCaptcha'
 import { upgradeToDeluxe, deluxeMembershipStatus } from './routes/deluxe'
 import { serveCodeSnippet, checkVulnLines } from './routes/vulnCodeSnippet'
-import { orderHistory, allOrders, toggleDeliveryStatus } from './routes/orderHistory'
+import { orderHistory, orderConfirmation, allOrders, toggleDeliveryStatus } from './routes/orderHistory'
 import { getAccounts } from './routes/accounts'
 import { createTransfer, getTransfers } from './routes/transfers'
 import { getScenePlus, redeemScenePlus } from './routes/scenePlus'
@@ -288,7 +288,7 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
 
   // vuln-code-snippet start directoryListingChallenge accessLogDisclosureChallenge
   /* /ftp directory browsing and file download */ // vuln-code-snippet neutral-line directoryListingChallenge
-  app.use('/ftp', serveIndexMiddleware, serveIndex('ftp', { icons: true })) // vuln-code-snippet vuln-line directoryListingChallenge
+  app.use('/ftp', serveIndexMiddleware, serveIndex('ftp', { icons: true, filter: (filename) => isPublicFtpFile(filename) })) // vuln-code-snippet vuln-line directoryListingChallenge
   app.use('/ftp(?!/quarantine)/:file', servePublicFiles()) // vuln-code-snippet vuln-line directoryListingChallenge
   app.use('/ftp/quarantine/:file', serveQuarantineFiles()) // vuln-code-snippet neutral-line directoryListingChallenge
 
@@ -648,6 +648,7 @@ function configureApp (app: ReturnType<typeof express>, seq: typeof sequelize) {
   app.post('/rest/transfers', security.isAuthorized(), utils.asyncHandler(createTransfer()))
   app.get('/rest/scene-plus', security.isAuthorized(), utils.asyncHandler(getScenePlus()))
   app.post('/rest/scene-plus/redeem', security.isAuthorized(), utils.asyncHandler(redeemScenePlus()))
+  app.get('/rest/order-history/:id/confirmation', security.isAuthorized(), utils.asyncHandler(orderConfirmation()))
   app.get('/rest/order-history/orders', security.isAccounting(), utils.asyncHandler(allOrders()))
   app.put('/rest/order-history/:id/delivery-status', security.isAccounting(), utils.asyncHandler(toggleDeliveryStatus()))
   app.get('/rest/wallet/balance', security.appendUserId(), utils.asyncHandler(getWalletBalance()))
