@@ -3,7 +3,6 @@
  * SPDX-License-Identifier: MIT
  */
 
-import path from 'node:path'
 import { type Request, type Response, type NextFunction } from 'express'
 
 import { ordersCollection } from '../data/mongodb'
@@ -42,7 +41,7 @@ export function orderConfirmation () {
       res.status(404).json({ status: 'error', message: 'Order not found' })
       return
     }
-    res.sendFile(path.join(orderConfirmationsFolder, `order_${orderId}.pdf`), (err) => {
+    res.sendFile(`order_${orderId}.pdf`, { root: orderConfirmationsFolder }, (err) => {
       if (err) next(err)
     })
   }
