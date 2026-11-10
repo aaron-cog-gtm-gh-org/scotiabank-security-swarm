@@ -64,3 +64,4 @@ config/*.yml
 # Misc
 .playwright-mcp/
 cypress/screenshots/
+data/orders/

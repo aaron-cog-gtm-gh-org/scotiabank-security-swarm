@@ -10,6 +10,7 @@ import type { Express } from 'express'
 import config from 'config'
 import { createTestApp } from './helpers/setup'
 import { login } from './helpers/auth'
+import { orderConfirmationsFolder } from '../../routes/order'
 
 let app: Express
 
@@ -131,5 +132,69 @@ void describe('/rest/order-history/:id/delivery-status', () => {
       .send({ delivered: false })
 
     assert.equal(res.status, 200)
+  })
+})
+
+void describe('order confirmation PDFs', () => {
+  let orderId: string
+  let ownerToken: string
+
+  before(async () => {
+    const { token, bid } = await login(app, {
+      email: 'jim@' + config.get<string>('application.domain'),
+      password: 'ncc-1701'
+    })
+    ownerToken = token
+    await request(app)
+      .post('/api/BasketItems')
+      .set({ Authorization: 'Bearer ' + token, 'content-type': 'application/json' })
+      .send({ BasketId: bid, ProductId: 1, quantity: 1 })
+    const res = await request(app)
+      .post(`/rest/basket/${bid}/checkout`)
+      .set({ Authorization: 'Bearer ' + token, 'content-type': 'application/json' })
+    assert.equal(res.status, 200)
+    orderId = res.body.orderConfirmation
+  })
+
+  void it('are not written to the public /ftp folder', async () => {
+    const listing = await request(app).get('/ftp')
+    assert.ok(!listing.text.includes(`order_${orderId}.pdf`))
+
+    const res = await request(app).get(`/ftp/order_${orderId}.pdf`)
+    assert.equal(res.status, 403)
+    assert.ok(orderConfirmationsFolder.endsWith('orders'))
+  })
+
+  void it('GET own order confirmation PDF', async () => {
+    const res = await request(app)
+      .get(`/rest/order-history/${orderId}/confirmation`)
+      .set({ Authorization: 'Bearer ' + ownerToken })
+      .buffer(true)
+    assert.equal(res.status, 200)
+    assert.ok(res.headers['content-type']?.includes('application/pdf'))
+  })
+
+  void it('GET order confirmation PDF without authentication is denied', async () => {
+    const res = await request(app)
+      .get(`/rest/order-history/${orderId}/confirmation`)
+    assert.equal(res.status, 401)
+  })
+
+  void it('GET order confirmation PDF of another customer is denied', async () => {
+    const { token } = await login(app, {
+      email: 'bender@' + config.get<string>('application.domain'),
+      password: 'OhG0dPlease1nsertLiquor!'
+    })
+    const res = await request(app)
+      .get(`/rest/order-history/${orderId}/confirmation`)
+      .set({ Authorization: 'Bearer ' + token })
+    assert.equal(res.status, 404)
+  })
+
+  void it('GET order confirmation PDF with a malformed order id is denied', async () => {
+    const res = await request(app)
+      .get(`/rest/order-history/${encodeURIComponent('../../ftp/acquisitions.md')}/confirmation`)
+      .set({ Authorization: 'Bearer ' + ownerToken })
+    assert.equal(res.status, 404)
   })
 })

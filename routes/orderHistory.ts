@@ -7,6 +7,7 @@ import { type Request, type Response, type NextFunction } from 'express'
 
 import { ordersCollection } from '../data/mongodb'
 import * as security from '../lib/insecurity'
+import { orderConfirmationsFolder } from './order'
 
 export function orderHistory () {
   return async (req: Request, res: Response, next: NextFunction) => {
@@ -19,6 +20,30 @@ export function orderHistory () {
     } else {
       next(new Error('Blocked illegal activity by ' + req.socket.remoteAddress))
     }
+  }
+}
+
+export function orderConfirmation () {
+  return async (req: Request, res: Response, next: NextFunction) => {
+    const loggedInUser = security.authenticatedUsers.get(req.headers?.authorization?.replace('Bearer ', ''))
+    if (!loggedInUser?.data?.email) {
+      res.status(401).json({ status: 'error', message: 'Unauthorized' })
+      return
+    }
+    const orderId = req.params.id
+    if (typeof orderId !== 'string' || !/^[0-9a-f]{4}-[0-9a-f]{16}$/.test(orderId)) {
+      res.status(404).json({ status: 'error', message: 'Order not found' })
+      return
+    }
+    const order = await ordersCollection.findOne({ orderId })
+    const customerToken = security.customerToken(loggedInUser.data.email, loggedInUser.data.username)
+    if (!order?.customerToken || order.customerToken !== customerToken) {
+      res.status(404).json({ status: 'error', message: 'Order not found' })
+      return
+    }
+    res.sendFile(`order_${orderId}.pdf`, { root: orderConfirmationsFolder }, (err) => {
+      if (err) next(err)
+    })
   }
 }
 
